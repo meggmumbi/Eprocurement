@@ -9366,7 +9366,7 @@ namespace E_Procurement.Eprocurement {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertBidPersonnelDetails", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnInsertBidPersonnelDetails_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string FnInsertBidPersonnelDetails(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole) {
+        public string FnInsertBidPersonnelDetails(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole, string fileLink, string filename) {
             object[] results = this.Invoke("FnInsertBidPersonnelDetails", new object[] {
                         vendorNo,
                         biddernumber,
@@ -9376,17 +9376,19 @@ namespace E_Procurement.Eprocurement {
                         emailAddress,
                         profession,
                         projectRoleCode,
-                        requiredProjectRole});
+                        requiredProjectRole,
+                        fileLink,
+                        filename});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void FnInsertBidPersonnelDetailsAsync(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole) {
-            this.FnInsertBidPersonnelDetailsAsync(vendorNo, biddernumber, staffName, staffcategory, emplymentType, emailAddress, profession, projectRoleCode, requiredProjectRole, null);
+        public void FnInsertBidPersonnelDetailsAsync(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole, string fileLink, string filename) {
+            this.FnInsertBidPersonnelDetailsAsync(vendorNo, biddernumber, staffName, staffcategory, emplymentType, emailAddress, profession, projectRoleCode, requiredProjectRole, fileLink, filename, null);
         }
         
         /// <remarks/>
-        public void FnInsertBidPersonnelDetailsAsync(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole, object userState) {
+        public void FnInsertBidPersonnelDetailsAsync(string vendorNo, string biddernumber, string staffName, int staffcategory, int emplymentType, string emailAddress, string profession, string projectRoleCode, string requiredProjectRole, string fileLink, string filename, object userState) {
             if ((this.FnInsertBidPersonnelDetailsOperationCompleted == null)) {
                 this.FnInsertBidPersonnelDetailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnInsertBidPersonnelDetailsOperationCompleted);
             }
@@ -9399,7 +9401,9 @@ namespace E_Procurement.Eprocurement {
                         emailAddress,
                         profession,
                         projectRoleCode,
-                        requiredProjectRole}, this.FnInsertBidPersonnelDetailsOperationCompleted, userState);
+                        requiredProjectRole,
+                        fileLink,
+                        filename}, this.FnInsertBidPersonnelDetailsOperationCompleted, userState);
         }
         
         private void OnFnInsertBidPersonnelDetailsOperationCompleted(object arg) {
@@ -9413,7 +9417,7 @@ namespace E_Procurement.Eprocurement {
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertBidEquipmentsDetails" +
             "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnInsertBidEquipmentsDetails_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string FnInsertBidEquipmentsDetails(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity) {
+        public string FnInsertBidEquipmentsDetails(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity, string fileLink, string filename) {
             object[] results = this.Invoke("FnInsertBidEquipmentsDetails", new object[] {
                         vendorNo,
                         biddernumber,
@@ -9423,17 +9427,19 @@ namespace E_Procurement.Eprocurement {
                         equipmentcondition,
                         equipmentusabilitycode,
                         equipmentserialnumber,
-                        equipmentsQuantity});
+                        equipmentsQuantity,
+                        fileLink,
+                        filename});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void FnInsertBidEquipmentsDetailsAsync(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity) {
-            this.FnInsertBidEquipmentsDetailsAsync(vendorNo, biddernumber, equipmentcategory, ownershiptypes, equipmentyearsused, equipmentcondition, equipmentusabilitycode, equipmentserialnumber, equipmentsQuantity, null);
+        public void FnInsertBidEquipmentsDetailsAsync(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity, string fileLink, string filename) {
+            this.FnInsertBidEquipmentsDetailsAsync(vendorNo, biddernumber, equipmentcategory, ownershiptypes, equipmentyearsused, equipmentcondition, equipmentusabilitycode, equipmentserialnumber, equipmentsQuantity, fileLink, filename, null);
         }
         
         /// <remarks/>
-        public void FnInsertBidEquipmentsDetailsAsync(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity, object userState) {
+        public void FnInsertBidEquipmentsDetailsAsync(string vendorNo, string biddernumber, string equipmentcategory, int ownershiptypes, decimal equipmentyearsused, int equipmentcondition, int equipmentusabilitycode, string equipmentserialnumber, decimal equipmentsQuantity, string fileLink, string filename, object userState) {
             if ((this.FnInsertBidEquipmentsDetailsOperationCompleted == null)) {
                 this.FnInsertBidEquipmentsDetailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnInsertBidEquipmentsDetailsOperationCompleted);
             }
@@ -9446,7 +9452,9 @@ namespace E_Procurement.Eprocurement {
                         equipmentcondition,
                         equipmentusabilitycode,
                         equipmentserialnumber,
-                        equipmentsQuantity}, this.FnInsertBidEquipmentsDetailsOperationCompleted, userState);
+                        equipmentsQuantity,
+                        fileLink,
+                        filename}, this.FnInsertBidEquipmentsDetailsOperationCompleted, userState);
         }
         
         private void OnFnInsertBidEquipmentsDetailsOperationCompleted(object arg) {

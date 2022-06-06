@@ -49,6 +49,7 @@
                                 <th>#</th>
                                 <th>Doc ID</th>
                                 <th>Description</th>
+                                <th>Instructions To bidders</th>
                                 <td>Attach Document</td>
                             </tr>
                         </thead>
@@ -68,6 +69,8 @@
                                     </td>
 
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.instructions)
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary pull-right rounded" onclick="AttachDocumentsTender('@item.Document_No','@item.Procurement_Document_Type_ID','@item.Description','@item.Requirement_Type','@ViewBag.invitationNo')"><i class="fa fa-pencil m-r-10"></i>Attach Document</a>
                                         @*<a href="#" class="btn btn-primary pull-right rounded" data-toggle="modal" data-target="#AttachDocuments"><i class="fa fa-plus"></i> Attach Document</a>*@

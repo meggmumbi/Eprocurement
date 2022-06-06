@@ -5269,6 +5269,8 @@
         <Property Name="Target_Qty" Type="Edm.Decimal" />
         <Property Name="Desired_Perfomance_Direction" Type="Edm.String" />
         <Property Name="Performance_Indicator_Proof" Type="Edm.String" />
+        <Property Name="Requirement_Type" Type="Edm.String" />
+        <Property Name="Contract_Ref_Clause" Type="Edm.String" />
       </EntityType>
       <EntityType Name="bidscoringTemplate">
         <Key>
@@ -6085,6 +6087,7 @@
         <Property Name="Description" Type="Edm.String" />
         <Property Name="Requirement_Type" Type="Edm.String" />
         <Property Name="Track_Certificate_Expiry" Type="Edm.Boolean" />
+        <Property Name="Guidelines_Instruction" Type="Edm.String" />
         <Property Name="AuxiliaryIndex1" Type="Edm.String" Nullable="false" />
       </EntityType>
       <EntityType Name="eProVendorQT">
@@ -6932,6 +6935,7 @@
         <Property Name="Requirement_Type" Type="Edm.String" />
         <Property Name="Special_Group_Requirement" Type="Edm.Boolean" />
         <Property Name="Specialized_Provider_Req" Type="Edm.Boolean" />
+        <Property Name="Guidelines_Instruction" Type="Edm.String" />
       </EntityType>
       <EntityType Name="ifsSecurities">
         <Key>

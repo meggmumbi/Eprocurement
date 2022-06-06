@@ -2513,7 +2513,7 @@ $(document).ready(function () {
 
 
             var formDt = new FormData();
-         formDt.append("typauploadselect", selectedFtype);
+            formDt.append("typauploadselect", selectedFtype);
             formDt.append("browsedfile", browsedDoc);
             formDt.append("filedescription", selvaluedescription);
             formDt.append("certificatenumber", certNumber);
@@ -2577,7 +2577,7 @@ $(document).ready(function () {
                                     $("#attachprequalificationdocumentsfeedback").css("display", "block");
                                     $("#attachprequalificationdocumentsfeedback").css("color", "green");
                                 });
-                                 window.location.href = "/Home/SupplierRegistration";
+                                window.location.href = "/Home/supplierDocuments";
                                 RegistrationDocuments.init();
                                 break;
                             case "browsedfilenull":
@@ -2641,7 +2641,7 @@ $(document).ready(function () {
         //  var VendorprequalificationNumber = $("#preapplicationo").val();    
 
         var prodocType = $("#ProcDocType").val();
-        var DocNo = $("#responseNumber").val();
+        var DocNo = $("#DocNo").val();
         var selvaluedescription = $("#description").val();
         var browsedDoc = document.getElementById('inputFileselector').files[0];
         var certNumber = $("#certificatenumber").val();
@@ -2650,7 +2650,7 @@ $(document).ready(function () {
         var response = $("#responseNumber").val();
 
         var formDt = new FormData();
-        formDt.append("BidResponseNumber", DocNo);
+        formDt.append("BidResponseNumber", response);
         formDt.append("prodocType", prodocType);
         formDt.append("browsedfile", browsedDoc);
         formDt.append("filedescription", selvaluedescription);

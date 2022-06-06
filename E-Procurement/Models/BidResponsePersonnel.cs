@@ -16,6 +16,7 @@ namespace E_Procurement.Models
         public string Profession { get; set; }
         public string ProjectRoleCode { get; set; }
         public string RequiredProfession { get; set; }
+        HttpPostedFile browsedFile { get; set; }
 
 
 

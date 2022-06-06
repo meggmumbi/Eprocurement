@@ -684,6 +684,8 @@
                                             <th>#</th>
                                             <th>Evaluation Type</th>
                                             <th>Evaluation Requirement</th>
+                                            <th>Requirement Type</th>
+                                            <th>Contract Ref Clause </th>
                                            
                                         </tr>
                                     </thead>
@@ -702,13 +704,13 @@
                                                     @Html.DisplayFor(modelItem => item.EvaluationRequirement)
 
                                                 </td>
-                                                @*<td>
-                                                    @Html.DisplayFor(modelItem => item.Total_Financial_Evaluation)
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.requirementType)
 
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.V5_EXCELLENT_Text_Bid_Score)
-                                                </td>*@
+                                                    @Html.DisplayFor(modelItem => item.contractRefClause)
+                                                </td>
                                             </tr>
                                         }
                                     </tbody>

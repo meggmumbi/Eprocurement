@@ -9,5 +9,7 @@
         public string Requirement_Type { get; set; }
         public string Special_Group_Requirement { get; set; }
         public string Specialized_Provider_Req { get; set; }
+
+        public string instructions { get; set; }
     }
 }

@@ -24,5 +24,7 @@ namespace E_Procurement.Models
        public string Code { get; set; }
         public string Procurement_Document_Type_ID { get; set; }
         public string Tracks_Certificate_Expiry { get; set; }
+
+        public string instructions { get; set; }
     }
 }

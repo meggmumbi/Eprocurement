@@ -3799,6 +3799,8 @@
             <element minOccurs="1" maxOccurs="1" name="profession" type="string" />
             <element minOccurs="1" maxOccurs="1" name="projectRoleCode" type="string" />
             <element minOccurs="1" maxOccurs="1" name="requiredProjectRole" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fileLink" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -3821,6 +3823,8 @@
             <element minOccurs="1" maxOccurs="1" name="equipmentusabilitycode" type="int" />
             <element minOccurs="1" maxOccurs="1" name="equipmentserialnumber" type="string" />
             <element minOccurs="1" maxOccurs="1" name="equipmentsQuantity" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="fileLink" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
           </sequence>
         </complexType>
       </element>

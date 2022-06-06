@@ -567,10 +567,10 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Service References\OData\Reference.datasvcmap">
+    <None Include="Service References\OData\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -819,7 +819,8 @@
     <Content Include="Views\Home\ViewSubmittedRFQResponses.cshtml" />
     <Content Include="Views\Home\RegistrationPeriod.cshtml" />
     <Content Include="Views\Home\TenderRFQAttachDocument.cshtml" />
-    <Content Include="Service References\OData\service.edmx" />
+    <None Include="Service References\OData\service.edmx" />
+    <Content Include="Views\Home\supplierDocuments.cshtml" />
     <None Include="Web References\Eprocurement\eprocurement.wsdl" />
     <None Include="Web References\Eprocurement\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

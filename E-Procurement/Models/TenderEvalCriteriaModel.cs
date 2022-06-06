@@ -22,5 +22,8 @@
         public string V4_VERY_GOOD_Text_Bid_Score { get; set; }
         public string V5_EXCELLENT_Text_Bid_Score { get; set; }
         public bool Blocked { get; set; }
+
+        public string requirementType { get; set; }
+        public string contractRefClause { get; set; }
     }
 }

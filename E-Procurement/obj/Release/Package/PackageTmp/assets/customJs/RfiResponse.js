@@ -1178,6 +1178,29 @@
             "Qty_of_Equipment": $("#editequipmentquantity").val(),
 
         }
+        var No = $("#bidnumber").val();
+        var Equipment_Type_Code = $("#ddlequipmentcategories").val();
+        var browsedDoc = document.getElementById('inputFileselector').files[0];
+        var Ownership_Type = $("#editOwnershiptype").val();
+        var Years_of_Previous_Use = $("#edityears").val();
+        var Equipment_Condition_Code = $("#editequipments").val();
+        var Equipment_Usability_Code = $("#editusabilitycode").val();
+        var Equipment_Serial = $("#editequipmentserial").val();
+        var Qty_of_Equipment = $("#editequipmentquantity").val();
+
+
+        var formDt = new FormData();
+        formDt.append("No", No);
+        formDt.append("browsedfile", browsedDoc);
+        formDt.append("Equipment_Type_Code", Equipment_Type_Code);
+        formDt.append("Ownership_Type", Ownership_Type);
+        formDt.append("Years_of_Previous_Use", Years_of_Previous_Use);
+        formDt.append("Equipment_Condition_Code", Equipment_Condition_Code);
+        formDt.append("Equipment_Usability_Code", Equipment_Usability_Code);
+        formDt.append("Equipment_Serial", Equipment_Serial);
+        formDt.append("Qty_of_Equipment", Qty_of_Equipment);
+     
+
         //Swal Message
         Swal.fire({
             title: "Confirm Bid Equipments Details?",
@@ -1195,8 +1218,8 @@
                 $.ajax({
                     url: "/Home/AddBidEquipmentsSpecificationDetails",
                     type: "POST",
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
+                    data: formDt,
+                    contentType: false,
                     cache: false,
                     processData: false
                 }).done(function (status) {
@@ -1252,6 +1275,7 @@
     //Supplier BidEquipments Reponse Function
     $(".btn_savepersonnel").click(function () {
         //Set data to be sent
+        
         var data = {
             "No": $("#bidnumber").val(),
             "StaffName": $("#staffName").val(),
@@ -1261,7 +1285,31 @@
             "Profession": $("#profession").val(),
             "ProjectRoleCode": $("#projectRoleCode").val(),
             "RequiredProfession": $("#requiredProjectRole").val(),
+            "browsedFile":  document.getElementById('inputFileselector').files[0]
+            
         }
+        var No = $("#bidnumber").val();
+        var StaffName = $("#staffName").val();
+        var StaffCategory = $("#staffcategory").val();
+        var EmploymentType = $("#emplymentType").val();
+        var EmailAddress = $("#emailAddress").val();
+        var Profession = $("#profession").val();
+        var ProjectRoleCode = $("#projectRoleCode").val();
+        var RequiredProfession = $("#requiredProjectRole").val();
+        var browsedDoc = document.getElementById('inputFileselector').files[0];
+
+
+        var formDt = new FormData();
+        formDt.append("No", No);
+        formDt.append("StaffName", StaffName);
+        formDt.append("StaffCategory", StaffCategory);
+        formDt.append("EmploymentType", EmploymentType);
+        formDt.append("EmailAddress", EmailAddress);
+        formDt.append("Profession", Profession);
+        formDt.append("ProjectRoleCode", ProjectRoleCode);
+        formDt.append("RequiredProfession", RequiredProfession);
+        formDt.append("browsedfile", browsedDoc);
+        console.log(JSON.stringify({ formdata: formDt }));
         //Swal Message
         Swal.fire({
             title: "Confirm Personnel Details?",
@@ -1279,8 +1327,8 @@
                 $.ajax({
                     url: "/Home/AddBidPersonnelDetails",
                     type: "POST",
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
+                    data: formDt,
+                    contentType: false,
                     cache: false,
                     processData: false
                 }).done(function (status) {

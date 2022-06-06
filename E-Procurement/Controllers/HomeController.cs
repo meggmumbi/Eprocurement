@@ -696,6 +696,24 @@ namespace E_Procurement.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult supplierDocuments()
+        {
+            if (Session["vendorNo"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var vendorNo = Session["vendorNo"].ToString();
+                dynamic model = new ExpandoObject();
+                model.UploadedDocuments = AlreadyRegisteredDocumentsDetails(vendorNo);
+                model.RequiredDocuments = RegistrationRequiredDocumentsDetails(vendorNo);
+
+                return View(model);
+            }
+        }
+
         public ActionResult TenderRFQAttachDocument(string tenderNo, string Response)
         {
             if (Session["vendorNo"] == null)
@@ -738,8 +756,6 @@ namespace E_Procurement.Controllers
                 model.BidDetails = GetBidResponseDetails(tenderNo, vendorNo);
                 ViewBag.TenderNo = Response;
                 model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(tenderNo, vendorNo);
-
-
                 return View(model);
             }
         }
@@ -1047,24 +1063,13 @@ namespace E_Procurement.Controllers
         {
             try
             {
-                var status = "";
+                
                 var nav = new NavConnection().ObjNav();
                 var vendorNo = Session["vendorNo"].ToString();
                 var nav1 = NavConnection.ReturnNav();
-                //var query = nav1.Vendors.Where(x => x.No == Convert.ToString(Session["vendorNo"]));
-                //foreach (var responses in query)
-                //{
-
-                //    if (responses.Profile_Complete == false)
-                //    {
-
-                //      return RedirectToAction("SupplierRegistration", "Home");
-                //    }
-                //    else if (responses.Profile_Complete == true)
-                //    {    
-                //        status = nav.FnSubmitTenderResponse(vendorNo, tendernumber);
-                //    }
-                //}
+               
+                var status = nav.FnSubmitTenderResponse(vendorNo, tendernumber);
+               
                 var res = status.Split('*');
                 switch (res[0])
                 {
@@ -1736,8 +1741,9 @@ namespace E_Procurement.Controllers
                         template.Code = bidtemplates.Template_ID;
                         template.EvaluationType = bidtemplates.Evaluation_Type;
                         template.EvaluationRequirement = bidtemplates.Evaluation_Requirement;
-                        
-                       
+                        template.requirementType = bidtemplates.Requirement_Type;
+                        template.contractRefClause = bidtemplates.Contract_Ref_Clause;
+
                         list.Add(template);
                     }
                 }
@@ -1815,6 +1821,7 @@ namespace E_Procurement.Controllers
                     document.Procurement_Document_Type_ID = Convert.ToString(documents.Procurement_Document_Type_ID);
                     document.Description = documents.Description;
                     document.Track_Certificate_Expiry = Convert.ToString(documents.Track_Certificate_Expiry);
+                    document.instructions = documents.Guidelines_Instruction;
                     if (document.Track_Certificate_Expiry == "True")
                     {
 
@@ -2331,11 +2338,11 @@ namespace E_Procurement.Controllers
             else
             {
                 List<TenderModel> list = new List<TenderModel>();
-                try
-                {
+             
+                    
                     var nav = NavConnection.ReturnNav();
                     var today = DateTime.Today;
-                    var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status== "Published" &&x.Procurement_Method=="Open Tender" ).ToList();
+                    var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status== "Published" &&x.Procurement_Method=="Open Tender").ToList();
                     //&&x.Submission_End_Date>=today
                     foreach (var tenders in query)
                     {
@@ -2360,12 +2367,7 @@ namespace E_Procurement.Controllers
                     }
 
 
-                }
-                catch (Exception e)
-                {
-
-                    throw;
-                }
+              
                 return View(list);
 
             }
@@ -2455,7 +2457,7 @@ namespace E_Procurement.Controllers
                 model.balancesheet = GetVendorBalanaceDetails(vendorNo);
                 model.incomestatement = GetVendorIncomeStatementDetails(vendorNo);
                 model.VendorProfessionalStaff = GetVendorProfessionalStaff(vendorNo);
-               model.UploadedDocuments = AlreadyRegisteredDocumentsDetails(vendorNo);
+                model.UploadedDocuments = AlreadyRegisteredDocumentsDetails(vendorNo);
                 model.RequiredDocuments = RegistrationRequiredDocumentsDetails(vendorNo);
                 return View(model);
 
@@ -3058,6 +3060,7 @@ namespace E_Procurement.Controllers
                     documents.Description = filedocuments.Description;
                     documents.Procurement_Document_Type = filedocuments.Procurement_Document_Type;
                     documents.Requirement_Type = filedocuments.Requirement_Type;
+                    documents.instructions = filedocuments.Guidelines_Instruction;
                     list.Add(documents);
                 }
             }
@@ -4341,7 +4344,7 @@ namespace E_Procurement.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public JsonResult RegisterBidSecurityDetails(BidResponseContractSecurity bidsecurityModel)
+        public JsonResult RegisterBidSecurityDetails(BidResponseContractSecurity bidsecurityModel,HttpPostedFileBase browsedfile)
         {
             try
             {
@@ -5149,23 +5152,54 @@ namespace E_Procurement.Controllers
                 return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult AddBidEquipmentsSpecificationDetails(BidEquipmentsSpecificationModel bidmodel)
+        public JsonResult AddBidEquipmentsSpecificationDetails(string No,HttpPostedFileBase browsedfile,string Equipment_Type_Code,string Ownership_Type, string Years_of_Previous_Use,string Equipment_Condition_Code,
+          string Equipment_Usability_Code,string Equipment_Serial,string Qty_of_Equipment)
         {
             try
             {
                 var vendorNo = Session["vendorNo"].ToString();
                 var nav = new NavConnection().ObjNav();
-                var status = nav.FnInsertBidEquipmentsDetails(vendorNo, bidmodel.No, bidmodel.Equipment_Type_Code, Convert.ToInt32(bidmodel.Ownership_Type), Convert.ToDecimal(bidmodel.Years_of_Previous_Use),
-                    Convert.ToInt32(bidmodel.Equipment_Condition_Code), Convert.ToInt32(bidmodel.Equipment_Usability_Code), bidmodel.Equipment_Serial, bidmodel.Qty_of_Equipment);
-                var res = status.Split('*');
-                switch (res[0])
+                int errCounter = 0;
+
+                if (browsedfile == null)
                 {
-                    case "success":
+                    errCounter++;
+                    return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
+                }
 
-                        return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+                string fileName0 = Path.GetFileName(browsedfile.FileName);
+                string ext0 = _getFileextension(browsedfile);
+                string savedF0 = vendorNo + "_" + fileName0 + ext0;
 
-                    default:
-                        return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                bool up2Sharepoint = _UploadSupplierDocumentToSharepoint(vendorNo, browsedfile, Equipment_Type_Code);
+
+
+                if (up2Sharepoint == true)
+                {
+                    string filename = vendorNo + "_" + fileName0;
+                    string sUrl = ConfigurationManager.AppSettings["S_URL"];
+                    string defaultlibraryname = "Procurement%20Documents/";
+                    string customlibraryname = "Vendor Card";
+                    string sharepointLibrary = defaultlibraryname + customlibraryname;
+                    string sharepointlink = sUrl + sharepointLibrary + "/" + vendorNo + "/" + filename;
+
+
+                    var status = nav.FnInsertBidEquipmentsDetails(vendorNo, No, Equipment_Type_Code, Convert.ToInt32(Ownership_Type), Convert.ToDecimal(Years_of_Previous_Use),
+                        Convert.ToInt32(Equipment_Condition_Code), Convert.ToInt32(Equipment_Usability_Code), Equipment_Serial, Convert.ToDecimal(Qty_of_Equipment), sharepointlink, filename);
+                    var res = status.Split('*');
+                    switch (res[0])
+                    {
+                        case "success":
+
+                            return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+
+                        default:
+                            return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("sharepointError*", JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)
@@ -5173,29 +5207,55 @@ namespace E_Procurement.Controllers
                 return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult AddBidPersonnelDetails(BidResponsePersonnel bidmodel)
+        public JsonResult AddBidPersonnelDetails(string No,string StaffName,string StaffCategory,string EmploymentType,string EmailAddress,string Profession,string ProjectRoleCode, string RequiredProfession,HttpPostedFileBase browsedfile)
         {
             try
             {
                 var vendorNo = Session["vendorNo"].ToString();
                 var nav = new NavConnection().ObjNav();
+                int errCounter = 0;
 
-
-
-
-
-
-                var status = nav.FnInsertBidPersonnelDetails(vendorNo, bidmodel.No, bidmodel.StaffName, Convert.ToInt32(bidmodel.StaffCategory), Convert.ToInt32(bidmodel.EmploymentType),
-                   bidmodel.EmailAddress,bidmodel.Profession, bidmodel.ProjectRoleCode,bidmodel.RequiredProfession);
-                var res = status.Split('*');
-                switch (res[0])
+                if (browsedfile == null)
                 {
-                    case "success":
+                    errCounter++;
+                    return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
+                }
 
-                        return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+                string fileName0 = Path.GetFileName(browsedfile.FileName);
+                string ext0 = _getFileextension(browsedfile);
+                string savedF0 = vendorNo + "_" + fileName0 + ext0;
 
-                    default:
-                        return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                bool up2Sharepoint = _UploadSupplierDocumentToSharepoint(vendorNo, browsedfile, StaffName);
+
+
+                if (up2Sharepoint == true)
+                {
+                    string filename = vendorNo + "_" + fileName0;
+                    string sUrl = ConfigurationManager.AppSettings["S_URL"];
+                    string defaultlibraryname = "Procurement%20Documents/";
+                    string customlibraryname = "Vendor Card";
+                    string sharepointLibrary = defaultlibraryname + customlibraryname;
+                    string sharepointlink = sUrl + sharepointLibrary + "/" + vendorNo + "/" + filename;
+
+
+
+
+                    var status = nav.FnInsertBidPersonnelDetails(vendorNo, No, StaffName, Convert.ToInt32(StaffCategory), Convert.ToInt32(EmploymentType),
+                     EmailAddress, Profession, ProjectRoleCode, RequiredProfession, sharepointlink, filename);
+                    var res = status.Split('*');
+                    switch (res[0])
+                    {
+                        case "success":
+
+                            return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+
+                        default:
+                            return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("sharepointError*", JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\projects\Dynasoft\Portals\publishedportals\kerraeproc</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Dynasoft Business Solutions\Dynasoft Portals\Puslished Portals\E-proc -kerra</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -112,7 +112,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/05/2021 11:06:46</publishTime>
     </File>
     <File Include="assets/customJs/CompleteSupplierRegistration.js">
-      <publishTime>05/30/2022 17:02:01</publishTime>
+      <publishTime>06/06/2022 14:45:09</publishTime>
     </File>
     <File Include="assets/customJs/Customjs.js">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -166,7 +166,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="assets/customJs/RfiResponse.js">
-      <publishTime>01/14/2022 18:27:50</publishTime>
+      <publishTime>05/31/2022 17:07:13</publishTime>
     </File>
     <File Include="assets/customJs/supplierRegistration.js">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -403,10 +403,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="bin/E-Procurement.dll">
-      <publishTime>05/30/2022 17:10:09</publishTime>
+      <publishTime>06/06/2022 14:55:13</publishTime>
     </File>
     <File Include="bin/E-Procurement.XmlSerializers.dll">
-      <publishTime>05/30/2022 17:10:14</publishTime>
+      <publishTime>06/06/2022 14:55:17</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1225,7 +1225,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Home/PrequalificationAttachedDocuments.cshtml">
-      <publishTime>04/27/2022 14:01:12</publishTime>
+      <publishTime>05/31/2022 17:41:44</publishTime>
     </File>
     <File Include="Views/Home/PrequalificationConstituencies.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1276,7 +1276,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2021 20:02:32</publishTime>
     </File>
     <File Include="Views/Home/RespondTenderWizard.cshtml">
-      <publishTime>04/11/2022 16:12:46</publishTime>
+      <publishTime>05/31/2022 17:03:31</publishTime>
     </File>
     <File Include="Views/Home/RFIResponse.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1317,17 +1317,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/supplierCategories.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
+    <File Include="Views/Home/supplierDocuments.cshtml">
+      <publishTime>05/31/2022 17:39:52</publishTime>
+    </File>
     <File Include="Views/Home/SupplierProfile.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Home/SupplierRegistration.cshtml">
-      <publishTime>05/30/2022 17:07:46</publishTime>
+      <publishTime>05/31/2022 12:01:08</publishTime>
     </File>
     <File Include="Views/Home/SuppliersCategoriesList.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Home/TenderAttachDocument.cshtml">
-      <publishTime>04/11/2022 15:48:08</publishTime>
+      <publishTime>05/31/2022 17:45:23</publishTime>
     </File>
     <File Include="Views/Home/TenderDocumentTemplateDroplist.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1336,7 +1339,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Home/TenderResponseForm.cshtml">
-      <publishTime>01/14/2022 16:07:40</publishTime>
+      <publishTime>05/31/2022 17:56:20</publishTime>
     </File>
     <File Include="Views/Home/TenderRFQAttachDocument.cshtml">
       <publishTime>10/26/2021 19:21:38</publishTime>
@@ -1456,7 +1459,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/21/2022 15:06:00</publishTime>
+      <publishTime>05/31/2022 11:20:52</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
