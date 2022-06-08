@@ -143,28 +143,28 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Ownership Type<span class="text-danger">*</span></label>
                                                                 <select data-live-search="true" class="form-control input-circle input-circle select2" id="ownershiptype" name="ownershiptype">
-                                                                    <option value="@vendor.Owner_Type">--Choose Type--</option>
-                                                                    <option value="1">Sole Ownership.Partnership</option>
-                                                                    <option value="2">Registered Company</option>
+                                                                    <option value="@vendor.Owner_Type"></option>
+                                                                    <option value="0">Sole Ownership.Partnership</option>
+                                                                    <option value="1">Registered Company</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Certificate of Incorporation No: <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="cretificateofincorperation" name="cretificateofincorperation" required="required" value="@vendor.CertofIncorporation">
+                                                                <input type="text" class="form-control" id="cretificateofincorperation" name="cretificateofincorperation" required="required">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Incorporation Date: <span class="text-danger">*</span></label>
-                                                                <div class="cal-icon"><input class="form-control datetimepicker" type="text" id="dateofincoperation" name="dateofincoperation" required="required"></div>
+                                                                <div class="cal-icon"><input class="form-control datetimepicker" type="text" id="dateofincoperation" name="dateofincoperation" required="required" value="@vendor.DateofIncorporation" ></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Operations Start Date:</label>
-                                                                <div class="cal-icon"><input class="form-control datetimepicker" type="text" id="startdateoperations" name="startdateoperations" required="required"></div>
+                                                                <div class="cal-icon"><input class="form-control datetimepicker" type="text" id="startdateoperations" name="startdateoperations" required="required" value="@vendor.OpsDate"></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -208,11 +208,11 @@
 
                                         </div>
                                     }
-                                    <center>
+                                    @*<center>
 
                                         <button class="btn btn-primary  saveGeneralDeatils" id="saveGeneralDeatils" name="saveGeneralDeatils" type="button">Save Details</button>
                                     </center>
-                                    <button class="btn btn-primary nextBtn  pull-right " type="button">Next</button>
+                                    <button class="btn btn-primary nextBtn  pull-right " type="button">Next</button>*@
 
 
                                     <div id="hidden_div" style="display:none">
@@ -261,13 +261,14 @@
                                                 <p><strong>NB:</strong> Verification of the validity of your AGPO Certificate can be done by accessing the AGPO website, by clicking on the following link: <a href="https://agpo.go.ke/">AGPO Website</a> </p>
 
                                             </div>
-                                            <center>
-                                                <button class="btn btn-primary btn_supplierSpecial_GroupRegister" id="btn_supplierSpecial_GroupRegister" name="btn_supplierSpecial_GroupRegister" type="button">Save Details</button>
-                                                <button class="btn btn-primary nextBtn pull-right" type="button" id="nextBtn" name="nextBtn" style="display:none">Continue</button>
-
-                                            </center>
+                                          
                                         </div>
                                     </div>
+                                    <center>
+                                        <button class="btn btn-primary saveGeneralDeatils" id="saveGeneralDeatils" name="saveGeneralDeatils" type="button">Save Details</button>
+                                        <button class="btn btn-primary nextBtn pull-right" type="button" id="nextBtn" name="nextBtn" style="display:none">Continue</button>
+
+                                    </center>
                                 </div>
                             </div>
                         </div>

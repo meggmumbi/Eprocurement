@@ -728,7 +728,7 @@ namespace E_Procurement.Controllers
                 ViewBag.invitationNo = Response;
                 model.RequiredDocuments = GetRequiredTenderDocuments(tenderNo);
                 model.RequredDocuemnts = GetIFSRequiredEquipments(tenderNo);
-                model.Response = RegistrationResponseDetails(tenderNo, vendorNo);
+              //  model.Response = RegistrationResponseDetails(tenderNo, vendorNo);
                 model.BidDetails = GetBidResponseDetails(tenderNo, vendorNo);
                 ViewBag.TenderNo = Response;
                 model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(tenderNo, vendorNo);
@@ -752,10 +752,10 @@ namespace E_Procurement.Controllers
                 ViewBag.invitationNo = Response;
                 model.RequiredDocuments = GetRequiredTenderDocuments(tenderNo);
                 model.RequredDocuemnts = GetIFSRequiredEquipments(tenderNo);
-                model.Response = RegistrationResponseDetails(tenderNo, vendorNo);
+               // model.Response = RegistrationResponseDetails(tenderNo, vendorNo);
                 model.BidDetails = GetBidResponseDetails(tenderNo, vendorNo);
                 ViewBag.TenderNo = Response;
-                model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(tenderNo, vendorNo);
+                model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(Response, vendorNo);
                 return View(model);
             }
         }
@@ -4484,27 +4484,58 @@ namespace E_Procurement.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public JsonResult RegisterPastExperienceDetails(PastExperienceModel pastexperience)
+        public JsonResult RegisterPastExperienceDetails(string No,string Client_Name,string Address,string Assignment_Project_Name,string Project_Scope_Summary,string Assignment_Start_Date,string Assignment_End_Date,string Assignment_Value_LCY,string Engangement_Type,string Main_Contractor,HttpPostedFileBase browsedfile)
         {
             try
             {
                 var vendorNo = Session["vendorNo"].ToString();
-                DateTime startdate, enddate;
-                CultureInfo usCulture = new CultureInfo("es-ES");
-                startdate = DateTime.Parse(pastexperience.Assignment_Start_Date, usCulture.DateTimeFormat);
-                enddate = DateTime.Parse(pastexperience.Assignment_End_Date, usCulture.DateTimeFormat);
                 var nav = new NavConnection().ObjNav();
-                var status = nav.FnInsertPastExperienceDetails(vendorNo, pastexperience.Client_Name, pastexperience.Address, pastexperience.Assignment_Project_Name,
-                 pastexperience.Project_Scope_Summary, startdate, enddate, Convert.ToDecimal(pastexperience.Assignment_Value_LCY));
-                var res = status.Split('*');
-                switch (res[0])
-                {
-                    case "success":
-                        return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+                int errCounter = 0;
 
-                    default:
-                        return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                if (browsedfile == null)
+                {
+                    errCounter++;
+                    return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
                 }
+
+                string fileName0 = Path.GetFileName(browsedfile.FileName);
+                string ext0 = _getFileextension(browsedfile);
+                string savedF0 = vendorNo + "_" + fileName0 + ext0;
+
+                bool up2Sharepoint = _UploadSupplierDocumentToSharepoint(vendorNo, browsedfile, Client_Name);
+
+
+                if (up2Sharepoint == true)
+                {
+                    string filename = vendorNo + "_" + fileName0;
+                    string sUrl = ConfigurationManager.AppSettings["S_URL"];
+                    string defaultlibraryname = "Procurement%20Documents/";
+                    string customlibraryname = "Vendor Card";
+                    string sharepointLibrary = defaultlibraryname + customlibraryname;
+                    string sharepointlink = sUrl + sharepointLibrary + "/" + vendorNo + "/" + filename;
+
+                    DateTime startdate, enddate;
+                    CultureInfo usCulture = new CultureInfo("es-ES");
+                    startdate = DateTime.Parse(Assignment_Start_Date, usCulture.DateTimeFormat);
+                    enddate = DateTime.Parse(Assignment_End_Date, usCulture.DateTimeFormat);
+
+                    var status = nav.FnInsertPastExperienceDetails(vendorNo, Client_Name, Address, Assignment_Project_Name,
+                     Project_Scope_Summary, startdate, enddate, Convert.ToDecimal(Assignment_Value_LCY), sharepointlink, filename,No);
+                    var res = status.Split('*');
+                    switch (res[0])
+                    {
+                        case "success":
+                            return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+
+                        default:
+                            return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("sharepointError*", JsonRequestBehavior.AllowGet);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -5530,8 +5561,8 @@ namespace E_Procurement.Controllers
                     vendor.Name = vendors.Name;
                     vendor.LanguageCode = vendors.Language_Code;
                     vendor.BusinessType = vendors.Business_Type;
-                    vendor.Vendor_Type = vendors.Supplier_Category;
-                    vendor.Owner_Type = vendors.Ownership_Type;
+                    //vendor.Vendor_Type = vendors.Supplier_Type;
+                   // vendor.Owner_Type = vendors.Ownership_Type;
                     vendor.OpsDate = Convert.ToString(vendors.Operations_Start_Date);
                     vendor.CertofIncorporation = vendors.Registration_Incorporation_No;
                     vendor.Mision = vendors.Mission_Statement;
@@ -5573,6 +5604,23 @@ namespace E_Procurement.Controllers
                     vendor.CountryofOrigin = Convert.ToString(vendors.Country_Region_Code);
                     vendor.Issued_Capital = Convert.ToString(vendors.Issued_Capital_LCY);
                     vendorsDetails.Add(vendor);
+
+                    if (vendors.Ownership_Type == "Sole Ownership.Partnership")
+                    {
+                        vendor.Owner_Type = "0";
+                    }
+                    else if (vendors.Ownership_Type == "Registered Company")
+                    {
+                        vendor.Owner_Type = "1";
+                    }
+                    if (vendors.Supplier_Type== "Local")
+                    {
+                        vendor.Vendor_Type = "0";
+                    }
+                    else if(vendors.Supplier_Type == "Local")
+                    {
+                        vendor.Vendor_Type="1";
+                    }
                 }
 
 

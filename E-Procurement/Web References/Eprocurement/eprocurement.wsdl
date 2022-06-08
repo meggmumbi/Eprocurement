@@ -2,6 +2,114 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/eprocurement" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="FnSupplierBusinessProfile">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="industryGroup" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companysize" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="nominalCap" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="vision" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="mission" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="maxbizvalue" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="mobileNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="natureofBiz" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSupplierBusinessProfile_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSupplierCommunicationDetails">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="postacode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryofOrigin" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="poAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="postaCity" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="webUrl" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="telephoneNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="buildingNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="floorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="plotNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="streetorRoad" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="faxNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSupplierCommunicationDetails_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDeleteResponsibilityCenter">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="regionCode" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDeleteResponsibilityCenter_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertRFregresponseHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="rfiDocumentNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertRFregresponseHeader_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDelBidRespDocument">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDelBidRespDocument_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDelDocument">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnDelDocument_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="FncancelWEPRecordApproval">
         <complexType>
           <sequence>
@@ -334,10 +442,66 @@
             <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
             <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
             <element minOccurs="1" maxOccurs="1" name="projectid" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="milestonecode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="guaranteeref" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="performancesecurityid" type="int" />
           </sequence>
         </complexType>
       </element>
       <element name="FnSubmitContractorPaymentRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorRetentionPaymentRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="projectid" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="milestonecode" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorRetentionPaymentRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorFinalPaymentRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="projectid" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="milestonecode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="guaranteeref" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="performancesecurityid" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorFinalPaymentRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorInterestPaymentRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="projectid" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="interestamount" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitContractorInterestPaymentRequest_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -1975,6 +2139,66 @@
           </sequence>
         </complexType>
       </element>
+      <element name="FnSubmitNotificationtoREMaterialTestRecord">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoREMaterialTestRecord_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoRESiteAgentNomination">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoRESiteAgentNomination_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoREContractorPersonnelAppointment">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoREContractorPersonnelAppointment_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendornumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="FnGetTakingOverSections">
         <complexType>
           <sequence>
@@ -2082,54 +2306,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="FnSupplierCommunicationDetails">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="postacode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="countryofOrigin" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="poAddress" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="postaCity" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="webUrl" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="telephoneNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="buildingNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="floorNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="plotNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="streetorRoad" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="faxNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnSupplierCommunicationDetails_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnSupplierBusinessProfile">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="industryGroup" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="companysize" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="nominalCap" type="decimal" />
-            <element minOccurs="1" maxOccurs="1" name="vision" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="mission" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="locationAddress" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="maxbizvalue" type="decimal" />
-            <element minOccurs="1" maxOccurs="1" name="mobileNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="natureofBiz" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnSupplierBusinessProfile_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="FnInsertRFIResponseResponsibilityCenter">
         <complexType>
           <sequence>
@@ -2142,66 +2318,6 @@
         </complexType>
       </element>
       <element name="FnInsertRFIResponseResponsibilityCenter_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDeleteResponsibilityCenter">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="regionCode" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDeleteResponsibilityCenter_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnInsertRFregresponseHeader">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="rfiDocumentNo" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnInsertRFregresponseHeader_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDelDocument">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDelDocument_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDelBidRespDocument">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="entryNo" type="int" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="FnDelBidRespDocument_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -3014,6 +3130,9 @@
             <element minOccurs="1" maxOccurs="1" name="projectStartDate" type="date" />
             <element minOccurs="1" maxOccurs="1" name="projectEndDate" type="date" />
             <element minOccurs="1" maxOccurs="1" name="projectValue" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="sharepointlink" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="bidderNo" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -3799,7 +3918,7 @@
             <element minOccurs="1" maxOccurs="1" name="profession" type="string" />
             <element minOccurs="1" maxOccurs="1" name="projectRoleCode" type="string" />
             <element minOccurs="1" maxOccurs="1" name="requiredProjectRole" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="fileLink" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sharepointlink" type="string" />
             <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
           </sequence>
         </complexType>
@@ -3823,7 +3942,7 @@
             <element minOccurs="1" maxOccurs="1" name="equipmentusabilitycode" type="int" />
             <element minOccurs="1" maxOccurs="1" name="equipmentserialnumber" type="string" />
             <element minOccurs="1" maxOccurs="1" name="equipmentsQuantity" type="decimal" />
-            <element minOccurs="1" maxOccurs="1" name="fileLink" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sharepointlink" type="string" />
             <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
           </sequence>
         </complexType>
@@ -4344,6 +4463,42 @@
       </element>
     </schema>
   </types>
+  <message name="FnSupplierBusinessProfile">
+    <part name="parameters" element="tns:FnSupplierBusinessProfile" />
+  </message>
+  <message name="FnSupplierBusinessProfile_Result">
+    <part name="parameters" element="tns:FnSupplierBusinessProfile_Result" />
+  </message>
+  <message name="FnSupplierCommunicationDetails">
+    <part name="parameters" element="tns:FnSupplierCommunicationDetails" />
+  </message>
+  <message name="FnSupplierCommunicationDetails_Result">
+    <part name="parameters" element="tns:FnSupplierCommunicationDetails_Result" />
+  </message>
+  <message name="FnDeleteResponsibilityCenter">
+    <part name="parameters" element="tns:FnDeleteResponsibilityCenter" />
+  </message>
+  <message name="FnDeleteResponsibilityCenter_Result">
+    <part name="parameters" element="tns:FnDeleteResponsibilityCenter_Result" />
+  </message>
+  <message name="FnInsertRFregresponseHeader">
+    <part name="parameters" element="tns:FnInsertRFregresponseHeader" />
+  </message>
+  <message name="FnInsertRFregresponseHeader_Result">
+    <part name="parameters" element="tns:FnInsertRFregresponseHeader_Result" />
+  </message>
+  <message name="FnDelBidRespDocument">
+    <part name="parameters" element="tns:FnDelBidRespDocument" />
+  </message>
+  <message name="FnDelBidRespDocument_Result">
+    <part name="parameters" element="tns:FnDelBidRespDocument_Result" />
+  </message>
+  <message name="FnDelDocument">
+    <part name="parameters" element="tns:FnDelDocument" />
+  </message>
+  <message name="FnDelDocument_Result">
+    <part name="parameters" element="tns:FnDelDocument_Result" />
+  </message>
   <message name="FncancelWEPRecordApproval">
     <part name="parameters" element="tns:FncancelWEPRecordApproval" />
   </message>
@@ -4457,6 +4612,24 @@
   </message>
   <message name="FnSubmitContractorPaymentRequest_Result">
     <part name="parameters" element="tns:FnSubmitContractorPaymentRequest_Result" />
+  </message>
+  <message name="FnSubmitContractorRetentionPaymentRequest">
+    <part name="parameters" element="tns:FnSubmitContractorRetentionPaymentRequest" />
+  </message>
+  <message name="FnSubmitContractorRetentionPaymentRequest_Result">
+    <part name="parameters" element="tns:FnSubmitContractorRetentionPaymentRequest_Result" />
+  </message>
+  <message name="FnSubmitContractorFinalPaymentRequest">
+    <part name="parameters" element="tns:FnSubmitContractorFinalPaymentRequest" />
+  </message>
+  <message name="FnSubmitContractorFinalPaymentRequest_Result">
+    <part name="parameters" element="tns:FnSubmitContractorFinalPaymentRequest_Result" />
+  </message>
+  <message name="FnSubmitContractorInterestPaymentRequest">
+    <part name="parameters" element="tns:FnSubmitContractorInterestPaymentRequest" />
+  </message>
+  <message name="FnSubmitContractorInterestPaymentRequest_Result">
+    <part name="parameters" element="tns:FnSubmitContractorInterestPaymentRequest_Result" />
   </message>
   <message name="FnSubmiCPRTaskLines">
     <part name="parameters" element="tns:FnSubmiCPRTaskLines" />
@@ -5016,6 +5189,30 @@
   <message name="FnSubmitNotificationtoRERequestForTakingOver_Result">
     <part name="parameters" element="tns:FnSubmitNotificationtoRERequestForTakingOver_Result" />
   </message>
+  <message name="FnSubmitNotificationtoREMaterialTestRecord">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREMaterialTestRecord" />
+  </message>
+  <message name="FnSubmitNotificationtoREMaterialTestRecord_Result">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREMaterialTestRecord_Result" />
+  </message>
+  <message name="FnSubmitNotificationtoRESiteAgentNomination">
+    <part name="parameters" element="tns:FnSubmitNotificationtoRESiteAgentNomination" />
+  </message>
+  <message name="FnSubmitNotificationtoRESiteAgentNomination_Result">
+    <part name="parameters" element="tns:FnSubmitNotificationtoRESiteAgentNomination_Result" />
+  </message>
+  <message name="FnSubmitNotificationtoREContractorPersonnelAppointment">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREContractorPersonnelAppointment" />
+  </message>
+  <message name="FnSubmitNotificationtoREContractorPersonnelAppointment_Result">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREContractorPersonnelAppointment_Result" />
+  </message>
+  <message name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite" />
+  </message>
+  <message name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result">
+    <part name="parameters" element="tns:FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result" />
+  </message>
   <message name="FnGetTakingOverSections">
     <part name="parameters" element="tns:FnGetTakingOverSections" />
   </message>
@@ -5052,47 +5249,11 @@
   <message name="FnGetProjectRoadLinks_Result">
     <part name="parameters" element="tns:FnGetProjectRoadLinks_Result" />
   </message>
-  <message name="FnSupplierCommunicationDetails">
-    <part name="parameters" element="tns:FnSupplierCommunicationDetails" />
-  </message>
-  <message name="FnSupplierCommunicationDetails_Result">
-    <part name="parameters" element="tns:FnSupplierCommunicationDetails_Result" />
-  </message>
-  <message name="FnSupplierBusinessProfile">
-    <part name="parameters" element="tns:FnSupplierBusinessProfile" />
-  </message>
-  <message name="FnSupplierBusinessProfile_Result">
-    <part name="parameters" element="tns:FnSupplierBusinessProfile_Result" />
-  </message>
   <message name="FnInsertRFIResponseResponsibilityCenter">
     <part name="parameters" element="tns:FnInsertRFIResponseResponsibilityCenter" />
   </message>
   <message name="FnInsertRFIResponseResponsibilityCenter_Result">
     <part name="parameters" element="tns:FnInsertRFIResponseResponsibilityCenter_Result" />
-  </message>
-  <message name="FnDeleteResponsibilityCenter">
-    <part name="parameters" element="tns:FnDeleteResponsibilityCenter" />
-  </message>
-  <message name="FnDeleteResponsibilityCenter_Result">
-    <part name="parameters" element="tns:FnDeleteResponsibilityCenter_Result" />
-  </message>
-  <message name="FnInsertRFregresponseHeader">
-    <part name="parameters" element="tns:FnInsertRFregresponseHeader" />
-  </message>
-  <message name="FnInsertRFregresponseHeader_Result">
-    <part name="parameters" element="tns:FnInsertRFregresponseHeader_Result" />
-  </message>
-  <message name="FnDelDocument">
-    <part name="parameters" element="tns:FnDelDocument" />
-  </message>
-  <message name="FnDelDocument_Result">
-    <part name="parameters" element="tns:FnDelDocument_Result" />
-  </message>
-  <message name="FnDelBidRespDocument">
-    <part name="parameters" element="tns:FnDelBidRespDocument" />
-  </message>
-  <message name="FnDelBidRespDocument_Result">
-    <part name="parameters" element="tns:FnDelBidRespDocument_Result" />
   </message>
   <message name="FnRegisterVendor">
     <part name="parameters" element="tns:FnRegisterVendor" />
@@ -5815,6 +5976,30 @@
     <part name="parameters" element="tns:FnsendWEPRecordForApproval_Result" />
   </message>
   <portType name="eprocurement_Port">
+    <operation name="FnSupplierBusinessProfile">
+      <input name="FnSupplierBusinessProfile" message="tns:FnSupplierBusinessProfile" />
+      <output name="FnSupplierBusinessProfile_Result" message="tns:FnSupplierBusinessProfile_Result" />
+    </operation>
+    <operation name="FnSupplierCommunicationDetails">
+      <input name="FnSupplierCommunicationDetails" message="tns:FnSupplierCommunicationDetails" />
+      <output name="FnSupplierCommunicationDetails_Result" message="tns:FnSupplierCommunicationDetails_Result" />
+    </operation>
+    <operation name="FnDeleteResponsibilityCenter">
+      <input name="FnDeleteResponsibilityCenter" message="tns:FnDeleteResponsibilityCenter" />
+      <output name="FnDeleteResponsibilityCenter_Result" message="tns:FnDeleteResponsibilityCenter_Result" />
+    </operation>
+    <operation name="FnInsertRFregresponseHeader">
+      <input name="FnInsertRFregresponseHeader" message="tns:FnInsertRFregresponseHeader" />
+      <output name="FnInsertRFregresponseHeader_Result" message="tns:FnInsertRFregresponseHeader_Result" />
+    </operation>
+    <operation name="FnDelBidRespDocument">
+      <input name="FnDelBidRespDocument" message="tns:FnDelBidRespDocument" />
+      <output name="FnDelBidRespDocument_Result" message="tns:FnDelBidRespDocument_Result" />
+    </operation>
+    <operation name="FnDelDocument">
+      <input name="FnDelDocument" message="tns:FnDelDocument" />
+      <output name="FnDelDocument_Result" message="tns:FnDelDocument_Result" />
+    </operation>
     <operation name="FncancelWEPRecordApproval">
       <input name="FncancelWEPRecordApproval" message="tns:FncancelWEPRecordApproval" />
       <output name="FncancelWEPRecordApproval_Result" message="tns:FncancelWEPRecordApproval_Result" />
@@ -5890,6 +6075,18 @@
     <operation name="FnSubmitContractorPaymentRequest">
       <input name="FnSubmitContractorPaymentRequest" message="tns:FnSubmitContractorPaymentRequest" />
       <output name="FnSubmitContractorPaymentRequest_Result" message="tns:FnSubmitContractorPaymentRequest_Result" />
+    </operation>
+    <operation name="FnSubmitContractorRetentionPaymentRequest">
+      <input name="FnSubmitContractorRetentionPaymentRequest" message="tns:FnSubmitContractorRetentionPaymentRequest" />
+      <output name="FnSubmitContractorRetentionPaymentRequest_Result" message="tns:FnSubmitContractorRetentionPaymentRequest_Result" />
+    </operation>
+    <operation name="FnSubmitContractorFinalPaymentRequest">
+      <input name="FnSubmitContractorFinalPaymentRequest" message="tns:FnSubmitContractorFinalPaymentRequest" />
+      <output name="FnSubmitContractorFinalPaymentRequest_Result" message="tns:FnSubmitContractorFinalPaymentRequest_Result" />
+    </operation>
+    <operation name="FnSubmitContractorInterestPaymentRequest">
+      <input name="FnSubmitContractorInterestPaymentRequest" message="tns:FnSubmitContractorInterestPaymentRequest" />
+      <output name="FnSubmitContractorInterestPaymentRequest_Result" message="tns:FnSubmitContractorInterestPaymentRequest_Result" />
     </operation>
     <operation name="FnSubmiCPRTaskLines">
       <input name="FnSubmiCPRTaskLines" message="tns:FnSubmiCPRTaskLines" />
@@ -6263,6 +6460,22 @@
       <input name="FnSubmitNotificationtoRERequestForTakingOver" message="tns:FnSubmitNotificationtoRERequestForTakingOver" />
       <output name="FnSubmitNotificationtoRERequestForTakingOver_Result" message="tns:FnSubmitNotificationtoRERequestForTakingOver_Result" />
     </operation>
+    <operation name="FnSubmitNotificationtoREMaterialTestRecord">
+      <input name="FnSubmitNotificationtoREMaterialTestRecord" message="tns:FnSubmitNotificationtoREMaterialTestRecord" />
+      <output name="FnSubmitNotificationtoREMaterialTestRecord_Result" message="tns:FnSubmitNotificationtoREMaterialTestRecord_Result" />
+    </operation>
+    <operation name="FnSubmitNotificationtoRESiteAgentNomination">
+      <input name="FnSubmitNotificationtoRESiteAgentNomination" message="tns:FnSubmitNotificationtoRESiteAgentNomination" />
+      <output name="FnSubmitNotificationtoRESiteAgentNomination_Result" message="tns:FnSubmitNotificationtoRESiteAgentNomination_Result" />
+    </operation>
+    <operation name="FnSubmitNotificationtoREContractorPersonnelAppointment">
+      <input name="FnSubmitNotificationtoREContractorPersonnelAppointment" message="tns:FnSubmitNotificationtoREContractorPersonnelAppointment" />
+      <output name="FnSubmitNotificationtoREContractorPersonnelAppointment_Result" message="tns:FnSubmitNotificationtoREContractorPersonnelAppointment_Result" />
+    </operation>
+    <operation name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite">
+      <input name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite" message="tns:FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite" />
+      <output name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result" message="tns:FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result" />
+    </operation>
     <operation name="FnGetTakingOverSections">
       <input name="FnGetTakingOverSections" message="tns:FnGetTakingOverSections" />
       <output name="FnGetTakingOverSections_Result" message="tns:FnGetTakingOverSections_Result" />
@@ -6287,33 +6500,9 @@
       <input name="FnGetProjectRoadLinks" message="tns:FnGetProjectRoadLinks" />
       <output name="FnGetProjectRoadLinks_Result" message="tns:FnGetProjectRoadLinks_Result" />
     </operation>
-    <operation name="FnSupplierCommunicationDetails">
-      <input name="FnSupplierCommunicationDetails" message="tns:FnSupplierCommunicationDetails" />
-      <output name="FnSupplierCommunicationDetails_Result" message="tns:FnSupplierCommunicationDetails_Result" />
-    </operation>
-    <operation name="FnSupplierBusinessProfile">
-      <input name="FnSupplierBusinessProfile" message="tns:FnSupplierBusinessProfile" />
-      <output name="FnSupplierBusinessProfile_Result" message="tns:FnSupplierBusinessProfile_Result" />
-    </operation>
     <operation name="FnInsertRFIResponseResponsibilityCenter">
       <input name="FnInsertRFIResponseResponsibilityCenter" message="tns:FnInsertRFIResponseResponsibilityCenter" />
       <output name="FnInsertRFIResponseResponsibilityCenter_Result" message="tns:FnInsertRFIResponseResponsibilityCenter_Result" />
-    </operation>
-    <operation name="FnDeleteResponsibilityCenter">
-      <input name="FnDeleteResponsibilityCenter" message="tns:FnDeleteResponsibilityCenter" />
-      <output name="FnDeleteResponsibilityCenter_Result" message="tns:FnDeleteResponsibilityCenter_Result" />
-    </operation>
-    <operation name="FnInsertRFregresponseHeader">
-      <input name="FnInsertRFregresponseHeader" message="tns:FnInsertRFregresponseHeader" />
-      <output name="FnInsertRFregresponseHeader_Result" message="tns:FnInsertRFregresponseHeader_Result" />
-    </operation>
-    <operation name="FnDelDocument">
-      <input name="FnDelDocument" message="tns:FnDelDocument" />
-      <output name="FnDelDocument_Result" message="tns:FnDelDocument_Result" />
-    </operation>
-    <operation name="FnDelBidRespDocument">
-      <input name="FnDelBidRespDocument" message="tns:FnDelBidRespDocument" />
-      <output name="FnDelBidRespDocument_Result" message="tns:FnDelBidRespDocument_Result" />
     </operation>
     <operation name="FnRegisterVendor">
       <input name="FnRegisterVendor" message="tns:FnRegisterVendor" />
@@ -6798,6 +6987,60 @@
   </portType>
   <binding name="eprocurement_Binding" type="tns:eprocurement_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="FnSupplierBusinessProfile">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSupplierBusinessProfile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSupplierBusinessProfile">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSupplierBusinessProfile_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSupplierCommunicationDetails">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSupplierCommunicationDetails" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSupplierCommunicationDetails">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSupplierCommunicationDetails_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnDeleteResponsibilityCenter">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDeleteResponsibilityCenter" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnDeleteResponsibilityCenter">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnDeleteResponsibilityCenter_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnInsertRFregresponseHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertRFregresponseHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnInsertRFregresponseHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnInsertRFregresponseHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnDelBidRespDocument">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDelBidRespDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnDelBidRespDocument">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnDelBidRespDocument_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnDelDocument">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDelDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnDelDocument">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnDelDocument_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="FncancelWEPRecordApproval">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FncancelWEPRecordApproval" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="FncancelWEPRecordApproval">
@@ -6966,6 +7209,33 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="FnSubmitContractorPaymentRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitContractorRetentionPaymentRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitContractorRetentionPaymentRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitContractorRetentionPaymentRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitContractorRetentionPaymentRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitContractorFinalPaymentRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitContractorFinalPaymentRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitContractorFinalPaymentRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitContractorFinalPaymentRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitContractorInterestPaymentRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitContractorInterestPaymentRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitContractorInterestPaymentRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitContractorInterestPaymentRequest_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -7806,6 +8076,42 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="FnSubmitNotificationtoREMaterialTestRecord">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitNotificationtoREMaterialTestRecord" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitNotificationtoREMaterialTestRecord">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitNotificationtoREMaterialTestRecord_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitNotificationtoRESiteAgentNomination">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitNotificationtoRESiteAgentNomination" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitNotificationtoRESiteAgentNomination">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitNotificationtoRESiteAgentNomination_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitNotificationtoREContractorPersonnelAppointment">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitNotificationtoREContractorPersonnelAppointment" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitNotificationtoREContractorPersonnelAppointment">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitNotificationtoREContractorPersonnelAppointment_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitNotificationtoREPlanofEquipmentDeliverytoSite_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="FnGetTakingOverSections">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnGetTakingOverSections" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="FnGetTakingOverSections">
@@ -7860,66 +8166,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="FnSupplierCommunicationDetails">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSupplierCommunicationDetails" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnSupplierCommunicationDetails">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnSupplierCommunicationDetails_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="FnSupplierBusinessProfile">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSupplierBusinessProfile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnSupplierBusinessProfile">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnSupplierBusinessProfile_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="FnInsertRFIResponseResponsibilityCenter">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertRFIResponseResponsibilityCenter" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="FnInsertRFIResponseResponsibilityCenter">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="FnInsertRFIResponseResponsibilityCenter_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="FnDeleteResponsibilityCenter">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDeleteResponsibilityCenter" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnDeleteResponsibilityCenter">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnDeleteResponsibilityCenter_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="FnInsertRFregresponseHeader">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertRFregresponseHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnInsertRFregresponseHeader">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnInsertRFregresponseHeader_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="FnDelDocument">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDelDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnDelDocument">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnDelDocument_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="FnDelBidRespDocument">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnDelBidRespDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="FnDelBidRespDocument">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="FnDelBidRespDocument_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

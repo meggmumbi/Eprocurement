@@ -27,7 +27,7 @@ function TenderRespond(url, uniquetenderno) {
                         Swal.fire
                        ({
                            title: "Tender Response has been created!",
-                           text: "Tender Response has been created,Proceed and Fill in the details!",
+                           text: "Submitting Tender Response,Kindly Wait!",
                            type: "success"
                        }).then(() => {
                            $("#responsesfeedback").css("display", "block");

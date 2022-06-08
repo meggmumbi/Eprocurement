@@ -1285,7 +1285,7 @@
             "Profession": $("#profession").val(),
             "ProjectRoleCode": $("#projectRoleCode").val(),
             "RequiredProfession": $("#requiredProjectRole").val(),
-            "browsedFile":  document.getElementById('inputFileselector').files[0]
+            "browsedFile": document.getElementById('inputFileselectorstaff').files[0]
             
         }
         var No = $("#bidnumber").val();
@@ -1296,7 +1296,7 @@
         var Profession = $("#profession").val();
         var ProjectRoleCode = $("#projectRoleCode").val();
         var RequiredProfession = $("#requiredProjectRole").val();
-        var browsedDoc = document.getElementById('inputFileselector').files[0];
+        var browsedDoc = document.getElementById('inputFileselectorstaff').files[0];
 
 
         var formDt = new FormData();
@@ -1349,7 +1349,7 @@
                                 $("#bideresponseequipmentsfeedback").css("display", "block");
                                 $("#bideresponseequipmentsfeedback").css("color", "green");
                                 $("#bideresponseequipmentsfeedback").html("Your Bid Response personnel Details was successfully submitted.Kindly proceed to fill in More Details!");
-                                window.location.href = "/Home/RespondTenderWizard";
+                                
                             });
                             VendorBidEquipmentsDetails.init();
                             $('#edit_personell').modal('hide');

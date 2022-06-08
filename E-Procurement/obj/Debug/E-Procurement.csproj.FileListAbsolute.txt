@@ -1274,6 +1274,6 @@ D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\bin\ko\Syste
 D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\bin\ru\System.Spatial.resources.dll
 D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\bin\zh-Hans\System.Spatial.resources.dll
 D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\bin\zh-Hant\System.Spatial.resources.dll
-D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\obj\Debug\E-Procurement.csprojResolveAssemblyReference.cache
 D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\obj\Debug\E-Procurement.dll
 D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\obj\Debug\E-Procurement.pdb
+D:\C#projects\Clients\KERRA\E-Proc\e-procurementKerra\E-Procurement\obj\Debug\E-Procurement.csprojResolveAssemblyReference.cache

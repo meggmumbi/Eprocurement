@@ -1169,15 +1169,39 @@ $(document).ready(function () {
             "Client_Name": $("#clientname").val(),
             "Address": $("#clientaddress").val(),
             "Assignment_Project_Name": $("#projectname").val(),
-            "Project_Scope_Summary": $("#projectscope").val(),        
-
+            "Project_Scope_Summary": $("#projectscope").val(),
             "Assignment_Start_Date": $("#assignmentsendstartdate").val(),
             "Assignment_End_Date": $("#assignmentsenddate").val(),
             "Assignment_Value_LCY": $("#assignmentvalue").val(),
             "Engangement_Type": $("#engagementtype").val(),
             "Main_Contractor": $("#maincontractor").val()
         }
-        console.log(JSON.stringify(VendorPastExperiencenObj))
+        var No = $("#bidnumber").val();
+        var Client_Name = $("#clientname").val();
+        var Address = $("#clientaddress").val();
+        var Assignment_Project_Name = $("#projectname").val();
+        var Project_Scope_Summary = $("#projectscope").val();
+        var Assignment_Start_Date = $("#assignmentsendstartdate").val();
+        var Assignment_End_Date = $("#assignmentsenddate").val();
+        var Assignment_Value_LCY = $("#assignmentvalue").val();
+        var Engangement_Type = $("#engagementtype").val();
+        var  Main_Contractor =  $("#maincontractor").val()
+        var browsedDoc = document.getElementById('inputFileselectorpast').files[0];
+
+
+        var formDt = new FormData();
+        formDt.append("No", No);
+        formDt.append("Client_Name", Client_Name);
+        formDt.append("Address", Address);
+        formDt.append("Assignment_Project_Name", Assignment_Project_Name);
+        formDt.append("Project_Scope_Summary", Project_Scope_Summary);
+        formDt.append("Assignment_Start_Date", Assignment_Start_Date);
+        formDt.append("Assignment_End_Date", Assignment_End_Date);
+        formDt.append("Assignment_Value_LCY", Assignment_Value_LCY);
+        formDt.append("Engangement_Type", Engangement_Type);
+        formDt.append("Main_Contractor", Main_Contractor);       
+        formDt.append("browsedfile", browsedDoc);
+        console.log(JSON.stringify({ formdata: formDt }));       
         //Swal Message
         Swal.fire({
             title: "Confirm Past Experience Details Submission?",
