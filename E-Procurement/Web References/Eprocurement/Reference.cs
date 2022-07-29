@@ -41,6 +41,14 @@ namespace E_Procurement.Eprocurement {
         
         private System.Threading.SendOrPostCallback FnDelDocumentOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FnPerformanceGiaranteeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FnInsertPerfGuarantDocumentsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FnSubmitPerformanceGiaranteeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FnInsertFiledetailsPerformanceGuaranteeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback FncancelWEPRecordApprovalOperationCompleted;
         
         private System.Threading.SendOrPostCallback FnGenerateWEPReportOperationCompleted;
@@ -588,6 +596,18 @@ namespace E_Procurement.Eprocurement {
         
         /// <remarks/>
         public event FnDelDocumentCompletedEventHandler FnDelDocumentCompleted;
+        
+        /// <remarks/>
+        public event FnPerformanceGiaranteeCompletedEventHandler FnPerformanceGiaranteeCompleted;
+        
+        /// <remarks/>
+        public event FnInsertPerfGuarantDocumentsCompletedEventHandler FnInsertPerfGuarantDocumentsCompleted;
+        
+        /// <remarks/>
+        public event FnSubmitPerformanceGiaranteeCompletedEventHandler FnSubmitPerformanceGiaranteeCompleted;
+        
+        /// <remarks/>
+        public event FnInsertFiledetailsPerformanceGuaranteeCompletedEventHandler FnInsertFiledetailsPerformanceGuaranteeCompleted;
         
         /// <remarks/>
         public event FncancelWEPRecordApprovalCompletedEventHandler FncancelWEPRecordApprovalCompleted;
@@ -1554,6 +1574,165 @@ namespace E_Procurement.Eprocurement {
             if ((this.FnDelDocumentCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.FnDelDocumentCompleted(this, new FnDelDocumentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnPerformanceGiarantee", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnPerformanceGiarantee_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FnPerformanceGiarantee(string documentoNo, string purchaseContactId, string projectId, string contaractorId, string insurerName, string policyNo, decimal amountInsured, string formOfSecurity, int issuerInstitutionType, string issuerRegOffice, string emailAddress, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime effectiveDate, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime expiryDate) {
+            object[] results = this.Invoke("FnPerformanceGiarantee", new object[] {
+                        documentoNo,
+                        purchaseContactId,
+                        projectId,
+                        contaractorId,
+                        insurerName,
+                        policyNo,
+                        amountInsured,
+                        formOfSecurity,
+                        issuerInstitutionType,
+                        issuerRegOffice,
+                        emailAddress,
+                        effectiveDate,
+                        expiryDate});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FnPerformanceGiaranteeAsync(string documentoNo, string purchaseContactId, string projectId, string contaractorId, string insurerName, string policyNo, decimal amountInsured, string formOfSecurity, int issuerInstitutionType, string issuerRegOffice, string emailAddress, System.DateTime effectiveDate, System.DateTime expiryDate) {
+            this.FnPerformanceGiaranteeAsync(documentoNo, purchaseContactId, projectId, contaractorId, insurerName, policyNo, amountInsured, formOfSecurity, issuerInstitutionType, issuerRegOffice, emailAddress, effectiveDate, expiryDate, null);
+        }
+        
+        /// <remarks/>
+        public void FnPerformanceGiaranteeAsync(string documentoNo, string purchaseContactId, string projectId, string contaractorId, string insurerName, string policyNo, decimal amountInsured, string formOfSecurity, int issuerInstitutionType, string issuerRegOffice, string emailAddress, System.DateTime effectiveDate, System.DateTime expiryDate, object userState) {
+            if ((this.FnPerformanceGiaranteeOperationCompleted == null)) {
+                this.FnPerformanceGiaranteeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnPerformanceGiaranteeOperationCompleted);
+            }
+            this.InvokeAsync("FnPerformanceGiarantee", new object[] {
+                        documentoNo,
+                        purchaseContactId,
+                        projectId,
+                        contaractorId,
+                        insurerName,
+                        policyNo,
+                        amountInsured,
+                        formOfSecurity,
+                        issuerInstitutionType,
+                        issuerRegOffice,
+                        emailAddress,
+                        effectiveDate,
+                        expiryDate}, this.FnPerformanceGiaranteeOperationCompleted, userState);
+        }
+        
+        private void OnFnPerformanceGiaranteeOperationCompleted(object arg) {
+            if ((this.FnPerformanceGiaranteeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FnPerformanceGiaranteeCompleted(this, new FnPerformanceGiaranteeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertPerfGuarantDocuments" +
+            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnInsertPerfGuarantDocuments_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FnInsertPerfGuarantDocuments(string vendorNo, string filename, string responseNo, string sharepointlink) {
+            object[] results = this.Invoke("FnInsertPerfGuarantDocuments", new object[] {
+                        vendorNo,
+                        filename,
+                        responseNo,
+                        sharepointlink});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FnInsertPerfGuarantDocumentsAsync(string vendorNo, string filename, string responseNo, string sharepointlink) {
+            this.FnInsertPerfGuarantDocumentsAsync(vendorNo, filename, responseNo, sharepointlink, null);
+        }
+        
+        /// <remarks/>
+        public void FnInsertPerfGuarantDocumentsAsync(string vendorNo, string filename, string responseNo, string sharepointlink, object userState) {
+            if ((this.FnInsertPerfGuarantDocumentsOperationCompleted == null)) {
+                this.FnInsertPerfGuarantDocumentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnInsertPerfGuarantDocumentsOperationCompleted);
+            }
+            this.InvokeAsync("FnInsertPerfGuarantDocuments", new object[] {
+                        vendorNo,
+                        filename,
+                        responseNo,
+                        sharepointlink}, this.FnInsertPerfGuarantDocumentsOperationCompleted, userState);
+        }
+        
+        private void OnFnInsertPerfGuarantDocumentsOperationCompleted(object arg) {
+            if ((this.FnInsertPerfGuarantDocumentsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FnInsertPerfGuarantDocumentsCompleted(this, new FnInsertPerfGuarantDocumentsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitPerformanceGiarantee" +
+            "", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnSubmitPerformanceGiarantee_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FnSubmitPerformanceGiarantee(string documentoNo) {
+            object[] results = this.Invoke("FnSubmitPerformanceGiarantee", new object[] {
+                        documentoNo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FnSubmitPerformanceGiaranteeAsync(string documentoNo) {
+            this.FnSubmitPerformanceGiaranteeAsync(documentoNo, null);
+        }
+        
+        /// <remarks/>
+        public void FnSubmitPerformanceGiaranteeAsync(string documentoNo, object userState) {
+            if ((this.FnSubmitPerformanceGiaranteeOperationCompleted == null)) {
+                this.FnSubmitPerformanceGiaranteeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnSubmitPerformanceGiaranteeOperationCompleted);
+            }
+            this.InvokeAsync("FnSubmitPerformanceGiarantee", new object[] {
+                        documentoNo}, this.FnSubmitPerformanceGiaranteeOperationCompleted, userState);
+        }
+        
+        private void OnFnSubmitPerformanceGiaranteeOperationCompleted(object arg) {
+            if ((this.FnSubmitPerformanceGiaranteeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FnSubmitPerformanceGiaranteeCompleted(this, new FnSubmitPerformanceGiaranteeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertFiledetailsPerforman" +
+            "ceGuarantee", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", ResponseElementName="FnInsertFiledetailsPerformanceGuarantee_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/eprocurement", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string FnInsertFiledetailsPerformanceGuarantee(string vendorNo, string type, string responseNo, string filepath) {
+            object[] results = this.Invoke("FnInsertFiledetailsPerformanceGuarantee", new object[] {
+                        vendorNo,
+                        type,
+                        responseNo,
+                        filepath});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FnInsertFiledetailsPerformanceGuaranteeAsync(string vendorNo, string type, string responseNo, string filepath) {
+            this.FnInsertFiledetailsPerformanceGuaranteeAsync(vendorNo, type, responseNo, filepath, null);
+        }
+        
+        /// <remarks/>
+        public void FnInsertFiledetailsPerformanceGuaranteeAsync(string vendorNo, string type, string responseNo, string filepath, object userState) {
+            if ((this.FnInsertFiledetailsPerformanceGuaranteeOperationCompleted == null)) {
+                this.FnInsertFiledetailsPerformanceGuaranteeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFnInsertFiledetailsPerformanceGuaranteeOperationCompleted);
+            }
+            this.InvokeAsync("FnInsertFiledetailsPerformanceGuarantee", new object[] {
+                        vendorNo,
+                        type,
+                        responseNo,
+                        filepath}, this.FnInsertFiledetailsPerformanceGuaranteeOperationCompleted, userState);
+        }
+        
+        private void OnFnInsertFiledetailsPerformanceGuaranteeOperationCompleted(object arg) {
+            if ((this.FnInsertFiledetailsPerformanceGuaranteeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FnInsertFiledetailsPerformanceGuaranteeCompleted(this, new FnInsertFiledetailsPerformanceGuaranteeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -11028,6 +11207,110 @@ namespace E_Procurement.Eprocurement {
         private object[] results;
         
         internal FnDelDocumentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FnPerformanceGiaranteeCompletedEventHandler(object sender, FnPerformanceGiaranteeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FnPerformanceGiaranteeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FnPerformanceGiaranteeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FnInsertPerfGuarantDocumentsCompletedEventHandler(object sender, FnInsertPerfGuarantDocumentsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FnInsertPerfGuarantDocumentsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FnInsertPerfGuarantDocumentsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FnSubmitPerformanceGiaranteeCompletedEventHandler(object sender, FnSubmitPerformanceGiaranteeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FnSubmitPerformanceGiaranteeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FnSubmitPerformanceGiaranteeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FnInsertFiledetailsPerformanceGuaranteeCompletedEventHandler(object sender, FnInsertFiledetailsPerformanceGuaranteeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FnInsertFiledetailsPerformanceGuaranteeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FnInsertFiledetailsPerformanceGuaranteeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

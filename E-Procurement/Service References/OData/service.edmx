@@ -38,6 +38,7 @@
         <Property Name="Advance_Payment_G_L_Account" Type="Edm.String" />
         <Property Name="Advance_Customer_No" Type="Edm.String" />
         <Property Name="Advance_Customer_Name" Type="Edm.String" />
+        <Property Name="Rejection_Remarks" Type="Edm.String" />
         <Property Name="Project_Start_Date" Type="Edm.DateTime" />
         <Property Name="Project_End_Date" Type="Edm.DateTime" />
         <Property Name="Project_Engineer_No" Type="Edm.String" />
@@ -550,6 +551,10 @@
         <Property Name="Project_Name" Type="Edm.String" />
         <Property Name="Status" Type="Edm.String" />
         <Property Name="Document_Type" Type="Edm.String" />
+        <Property Name="Rejection_Remarks" Type="Edm.String" />
+        <Property Name="Rejected_By" Type="Edm.String" />
+        <Property Name="Rejected_DateTime" Type="Edm.DateTime" />
+        <Property Name="Assigned_To" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
       <EntityType Name="ContractorVariationRequest">
@@ -671,31 +676,47 @@
           <PropertyRef Name="Document_No" />
           <PropertyRef Name="Document_Type" />
         </Key>
-        <Property Name="Document_Type" Type="Edm.String" Nullable="false" />
         <Property Name="Document_No" Type="Edm.String" Nullable="false" />
-        <Property Name="Document_Date" Type="Edm.DateTime" />
-        <Property Name="Purchase_Contract_ID" Type="Edm.String" />
+        <Property Name="Document_Type" Type="Edm.String" Nullable="false" />
         <Property Name="Project_ID" Type="Edm.String" />
-        <Property Name="Contractor_ID" Type="Edm.String" />
-        <Property Name="Contractor_Name" Type="Edm.String" />
         <Property Name="Project_Name" Type="Edm.String" />
-        <Property Name="Description" Type="Edm.String" />
-        <Property Name="Insurer_Guarantor_Name" Type="Edm.String" />
-        <Property Name="Policy_Guarantee_No" Type="Edm.String" />
-        <Property Name="Amount_Insured_Guaranteed" Type="Edm.Decimal" />
-        <Property Name="Form_of_Security" Type="Edm.String" />
-        <Property Name="Security_Type" Type="Edm.String" />
-        <Property Name="Issuer_Institution_Type" Type="Edm.String" />
-        <Property Name="Issuer_Registered_Offices" Type="Edm.String" />
-        <Property Name="Effective_Date" Type="Edm.DateTime" />
-        <Property Name="Expiry_Date" Type="Edm.DateTime" />
-        <Property Name="Expiry_Notification_Date" Type="Edm.DateTime" />
-        <Property Name="Second_Expiry_Notification_Dat" Type="Edm.DateTime" />
+        <Property Name="Purchase_Contract_ID" Type="Edm.String" />
+        <Property Name="Contract_Name" Type="Edm.String" />
+        <Property Name="Document_Date" Type="Edm.DateTime" />
+        <Property Name="Day_Week_Month_From" Type="Edm.DateTime" />
+        <Property Name="Day_Week_Month_To" Type="Edm.DateTime" />
         <Property Name="Status" Type="Edm.String" />
-        <Property Name="Blocked" Type="Edm.Boolean" />
-        <Property Name="Expired" Type="Edm.Boolean" />
+        <Property Name="Portal_Status" Type="Edm.String" />
+        <Property Name="Site_Agent_ID" Type="Edm.String" />
+        <Property Name="Site_Agent_Name" Type="Edm.String" />
+        <Property Name="Resident_Engineer_ID" Type="Edm.String" />
+        <Property Name="Resident_Engineer_Name" Type="Edm.String" />
+        <Property Name="Contractor_No" Type="Edm.String" />
+        <Property Name="Contractor_Name" Type="Edm.String" />
+        <Property Name="Prepared_By" Type="Edm.String" />
         <Property Name="Created_By" Type="Edm.String" />
+        <Property Name="Confirmed_By" Type="Edm.String" />
+        <Property Name="Received_By" Type="Edm.String" />
         <Property Name="Created_DateTime" Type="Edm.DateTime" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+        <NavigationProperty Name="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Relationship="NAV.DailyWorkPlan_DailyWorkPlanWeekly_Work_Plan_Line_Subpage" ToRole="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" FromRole="DailyWorkPlan" />
+      </EntityType>
+      <EntityType Name="DailyWorkPlanWeekly_Work_Plan_Line_Subpage">
+        <Key>
+          <PropertyRef Name="Activity_Code" />
+          <PropertyRef Name="Document_No" />
+          <PropertyRef Name="Document_Type" />
+          <PropertyRef Name="Line_No" />
+        </Key>
+        <Property Name="Document_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Document_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Activity_Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Start_Date" Type="Edm.DateTime" />
+        <Property Name="End_Date" Type="Edm.DateTime" />
+        <Property Name="Activity_Description" Type="Edm.String" />
+        <Property Name="Total_Done_To_date" Type="Edm.Decimal" />
+        <Property Name="Project_ID" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
       <EntityType Name="DailyWorkPlanLineSubpage">
@@ -2041,6 +2062,35 @@
         <NavigationProperty Name="Overall_Risk_Rating_Scale_ID_Link" Relationship="NAV.NewRiskVouchers_Overall_Risk_Rating_Scale_ID_Link" ToRole="Overall_Risk_Rating_Scale_ID_Link" FromRole="NewRiskVouchers" />
         <NavigationProperty Name="Risk_Appetite_Rating_Scale_ID_Link" Relationship="NAV.NewRiskVouchers_Risk_Appetite_Rating_Scale_ID_Link" ToRole="Risk_Appetite_Rating_Scale_ID_Link" FromRole="NewRiskVouchers" />
       </EntityType>
+      <EntityType Name="OldPerformanceGuarantees">
+        <Key>
+          <PropertyRef Name="Document_No" />
+          <PropertyRef Name="Document_Type" />
+        </Key>
+        <Property Name="Document_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Document_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Document_Date" Type="Edm.DateTime" />
+        <Property Name="Contractor_ID" Type="Edm.String" />
+        <Property Name="Contractor_Name" Type="Edm.String" />
+        <Property Name="Project_ID" Type="Edm.String" />
+        <Property Name="Project_Name" Type="Edm.String" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="Insurer_Guarantor_Name" Type="Edm.String" />
+        <Property Name="Policy_Guarantee_No" Type="Edm.String" />
+        <Property Name="Expiry_Date" Type="Edm.DateTime" />
+        <Property Name="Effective_Date" Type="Edm.DateTime" />
+        <Property Name="Expiry_Notification_Date" Type="Edm.DateTime" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Amount_Insured_Guaranteed" Type="Edm.Decimal" />
+        <Property Name="Purchase_Contract_ID" Type="Edm.String" />
+        <Property Name="Form_of_Security" Type="Edm.String" />
+        <Property Name="Security_Type" Type="Edm.String" />
+        <Property Name="Issuer_Institution_Type" Type="Edm.String" />
+        <Property Name="Issuer_Registered_Offices" Type="Edm.String" />
+        <Property Name="Insurance_Type" Type="Edm.String" />
+        <Property Name="Second_Expiry_Notification_Dat" Type="Edm.DateTime" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
       <EntityType Name="Pending_Po">
         <Key>
           <PropertyRef Name="Document_No" />
@@ -2454,7 +2504,6 @@
         <Property Name="Section_Length_Km" Type="Edm.Decimal" />
         <Property Name="Work_Plan_Project_ID" Type="Edm.String" />
         <Property Name="Workplan_Task_No" Type="Edm.String" />
-        <Property Name="Total_Workplanned_Length" Type="Edm.Decimal" />
         <Property Name="Invite_Tender" Type="Edm.DateTime" />
         <Property Name="Open_Tender" Type="Edm.DateTime" />
         <Property Name="Bid_Evaluation" Type="Edm.DateTime" />
@@ -2465,6 +2514,12 @@
         <Property Name="Completion_of_works" Type="Edm.DateTime" />
         <Property Name="Revision_No" Type="Edm.Int32" />
         <Property Name="Blocked" Type="Edm.Boolean" />
+        <Property Name="Project_Code" Type="Edm.String" />
+        <Property Name="KeRRA_Budget_Code" Type="Edm.String" />
+        <Property Name="Project_Type" Type="Edm.String" />
+        <Property Name="Works_Type" Type="Edm.String" />
+        <Property Name="Original_Budget" Type="Edm.String" />
+        <Property Name="Budget_Type_1" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
         <NavigationProperty Name="Unit_of_Measure_Link" Relationship="NAV.ProcurementPlanEntry_Unit_of_Measure_Link" ToRole="Unit_of_Measure_Link" FromRole="ProcurementPlanEntry" />
         <NavigationProperty Name="Region_Link" Relationship="NAV.ProcurementPlanEntry_Region_Link" ToRole="Region_Link" FromRole="ProcurementPlanEntry" />
@@ -4826,9 +4881,9 @@
       </EntityType>
       <EntityType Name="BidContractSecurity">
         <Key>
-          <PropertyRef Name="AuxiliaryIndex1" />
           <PropertyRef Name="IFS_No" />
           <PropertyRef Name="No" />
+          <PropertyRef Name="Reference_No" />
           <PropertyRef Name="Security_ID" />
           <PropertyRef Name="Vendor_No" />
         </Key>
@@ -4850,7 +4905,7 @@
         <Property Name="Security_Closure_Type" Type="Edm.String" />
         <Property Name="Blocked" Type="Edm.Boolean" />
         <Property Name="IFS_No" Type="Edm.String" Nullable="false" />
-        <Property Name="AuxiliaryIndex1" Type="Edm.String" Nullable="false" />
+        <Property Name="Reference_No" Type="Edm.String" Nullable="false" />
       </EntityType>
       <EntityType Name="BidContractsSecurities">
         <Key>
@@ -5696,6 +5751,25 @@
         <Property Name="Document_Date" Type="Edm.DateTime" />
         <Property Name="Status" Type="Edm.String" />
         <Property Name="No_Series" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="ContractRequirements">
+        <Key>
+          <PropertyRef Name="Document_ID" />
+          <PropertyRef Name="Process_Area" />
+          <PropertyRef Name="Procurement_Document_Type" />
+        </Key>
+        <Property Name="Document_ID" Type="Edm.String" Nullable="false" />
+        <Property Name="Procurement_Document_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Requirement_Type" Type="Edm.String" />
+        <Property Name="Track_Certificate_Expiry" Type="Edm.Boolean" />
+        <Property Name="Guidelines_Instruction" Type="Edm.String" />
+        <Property Name="Contract_ID" Type="Edm.String" />
+        <Property Name="Document_Link" Type="Edm.String" />
+        <Property Name="Process_Area" Type="Edm.String" Nullable="false" />
+        <Property Name="Contract_Index" Type="Edm.Int32" />
+        <Property Name="PRN_No" Type="Edm.String" />
+        <Property Name="IFS_Code" Type="Edm.String" />
       </EntityType>
       <EntityType Name="Copyright_Files">
         <Key>
@@ -6890,11 +6964,12 @@
       <EntityType Name="ifsBidSCoreCritGrp">
         <Key>
           <PropertyRef Name="Criteria_Group_ID" />
+          <PropertyRef Name="Evaluation_Type" />
           <PropertyRef Name="Template_ID" />
         </Key>
         <Property Name="Template_ID" Type="Edm.String" Nullable="false" />
         <Property Name="Criteria_Group_ID" Type="Edm.String" Nullable="false" />
-        <Property Name="Evaluation_Type" Type="Edm.String" />
+        <Property Name="Evaluation_Type" Type="Edm.String" Nullable="false" />
         <Property Name="Description" Type="Edm.String" />
         <Property Name="Total_Weight" Type="Edm.Decimal" />
       </EntityType>
@@ -12150,6 +12225,7 @@
         <NavigationProperty Name="ContractorVariationRequestProject_Variation_SubPage" Relationship="NAV.Company_ContractorVariationRequestProject_Variation_SubPage" ToRole="ContractorVariationRequestProject_Variation_SubPage" FromRole="Company" />
         <NavigationProperty Name="DailyPlanningWorkPlanLines" Relationship="NAV.Company_DailyPlanningWorkPlanLines" ToRole="DailyPlanningWorkPlanLines" FromRole="Company" />
         <NavigationProperty Name="DailyWorkPlan" Relationship="NAV.Company_DailyWorkPlan" ToRole="DailyWorkPlan" FromRole="Company" />
+        <NavigationProperty Name="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Relationship="NAV.Company_DailyWorkPlanWeekly_Work_Plan_Line_Subpage" ToRole="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" FromRole="Company" />
         <NavigationProperty Name="DailyWorkPlanLineSubpage" Relationship="NAV.Company_DailyWorkPlanLineSubpage" ToRole="DailyWorkPlanLineSubpage" FromRole="Company" />
         <NavigationProperty Name="DailyWorkRecordCard" Relationship="NAV.Company_DailyWorkRecordCard" ToRole="DailyWorkRecordCard" FromRole="Company" />
         <NavigationProperty Name="DailyWorkRecordCardDaily_Work_Record_Execution_Li" Relationship="NAV.Company_DailyWorkRecordCardDaily_Work_Record_Execution_Li" ToRole="DailyWorkRecordCardDaily_Work_Record_Execution_Li" FromRole="Company" />
@@ -12200,6 +12276,7 @@
         <NavigationProperty Name="NewRiskVoucherCardNew_Risk_Voucher_Lines" Relationship="NAV.Company_NewRiskVoucherCardNew_Risk_Voucher_Lines" ToRole="NewRiskVoucherCardNew_Risk_Voucher_Lines" FromRole="Company" />
         <NavigationProperty Name="NewRiskVoucherLines" Relationship="NAV.Company_NewRiskVoucherLines" ToRole="NewRiskVoucherLines" FromRole="Company" />
         <NavigationProperty Name="NewRiskVouchers" Relationship="NAV.Company_NewRiskVouchers" ToRole="NewRiskVouchers" FromRole="Company" />
+        <NavigationProperty Name="OldPerformanceGuarantees" Relationship="NAV.Company_OldPerformanceGuarantees" ToRole="OldPerformanceGuarantees" FromRole="Company" />
         <NavigationProperty Name="Pending_Po" Relationship="NAV.Company_Pending_Po" ToRole="Pending_Po" FromRole="Company" />
         <NavigationProperty Name="PeriodicRiskStatusReports" Relationship="NAV.Company_PeriodicRiskStatusReports" ToRole="PeriodicRiskStatusReports" FromRole="Company" />
         <NavigationProperty Name="PettyCashLines" Relationship="NAV.Company_PettyCashLines" ToRole="PettyCashLines" FromRole="Company" />
@@ -12333,6 +12410,7 @@
         <NavigationProperty Name="companySizes" Relationship="NAV.Company_companySizes" ToRole="companySizes" FromRole="Company" />
         <NavigationProperty Name="contacts" Relationship="NAV.Company_contacts" ToRole="contacts" FromRole="Company" />
         <NavigationProperty Name="ContractorSupervisonRequirements" Relationship="NAV.Company_ContractorSupervisonRequirements" ToRole="ContractorSupervisonRequirements" FromRole="Company" />
+        <NavigationProperty Name="ContractRequirements" Relationship="NAV.Company_ContractRequirements" ToRole="ContractRequirements" FromRole="Company" />
         <NavigationProperty Name="Copyright_Files" Relationship="NAV.Company_Copyright_Files" ToRole="Copyright_Files" FromRole="Company" />
         <NavigationProperty Name="CopyrightCategories" Relationship="NAV.Company_CopyrightCategories" ToRole="CopyrightCategories" FromRole="Company" />
         <NavigationProperty Name="copyrightsetups" Relationship="NAV.Company_copyrightsetups" ToRole="copyrightsetups" FromRole="Company" />
@@ -12663,6 +12741,10 @@
       <Association Name="DailyPlanningWorkPlanLines_Foreman_ID_Link">
         <End Type="NAV.WEPContractorTeamsList" Role="Foreman_ID_Link" Multiplicity="0..1" />
         <End Type="NAV.DailyPlanningWorkPlanLines" Role="DailyPlanningWorkPlanLines" Multiplicity="*" />
+      </Association>
+      <Association Name="DailyWorkPlan_DailyWorkPlanWeekly_Work_Plan_Line_Subpage">
+        <End Type="NAV.DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Role="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Multiplicity="*" />
+        <End Type="NAV.DailyWorkPlan" Role="DailyWorkPlan" Multiplicity="*" />
       </Association>
       <Association Name="DailyWorkRecordCard_DailyWorkRecordCardDaily_Work_Record_Execution_Li">
         <End Type="NAV.DailyWorkRecordCardDaily_Work_Record_Execution_Li" Role="DailyWorkRecordCardDaily_Work_Record_Execution_Li" Multiplicity="*" />
@@ -13588,6 +13670,10 @@
         <End Type="NAV.DailyWorkPlan" Role="DailyWorkPlan" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
+      <Association Name="Company_DailyWorkPlanWeekly_Work_Plan_Line_Subpage">
+        <End Type="NAV.DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Role="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
       <Association Name="Company_DailyWorkPlanLineSubpage">
         <End Type="NAV.DailyWorkPlanLineSubpage" Role="DailyWorkPlanLineSubpage" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
@@ -13786,6 +13872,10 @@
       </Association>
       <Association Name="Company_NewRiskVouchers">
         <End Type="NAV.NewRiskVouchers" Role="NewRiskVouchers" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_OldPerformanceGuarantees">
+        <End Type="NAV.OldPerformanceGuarantees" Role="OldPerformanceGuarantees" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_Pending_Po">
@@ -14318,6 +14408,10 @@
       </Association>
       <Association Name="Company_ContractorSupervisonRequirements">
         <End Type="NAV.ContractorSupervisonRequirements" Role="ContractorSupervisonRequirements" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_ContractRequirements">
+        <End Type="NAV.ContractRequirements" Role="ContractRequirements" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_Copyright_Files">
@@ -15281,6 +15375,7 @@
         <EntitySet Name="ContractorVariationRequestProject_Variation_SubPage" EntityType="NAV.ContractorVariationRequestProject_Variation_SubPage" />
         <EntitySet Name="DailyPlanningWorkPlanLines" EntityType="NAV.DailyPlanningWorkPlanLines" />
         <EntitySet Name="DailyWorkPlan" EntityType="NAV.DailyWorkPlan" />
+        <EntitySet Name="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" EntityType="NAV.DailyWorkPlanWeekly_Work_Plan_Line_Subpage" />
         <EntitySet Name="DailyWorkPlanLineSubpage" EntityType="NAV.DailyWorkPlanLineSubpage" />
         <EntitySet Name="DailyWorkRecordCard" EntityType="NAV.DailyWorkRecordCard" />
         <EntitySet Name="DailyWorkRecordCardDaily_Work_Record_Execution_Li" EntityType="NAV.DailyWorkRecordCardDaily_Work_Record_Execution_Li" />
@@ -15331,6 +15426,7 @@
         <EntitySet Name="NewRiskVoucherCardNew_Risk_Voucher_Lines" EntityType="NAV.NewRiskVoucherCardNew_Risk_Voucher_Lines" />
         <EntitySet Name="NewRiskVoucherLines" EntityType="NAV.NewRiskVoucherLines" />
         <EntitySet Name="NewRiskVouchers" EntityType="NAV.NewRiskVouchers" />
+        <EntitySet Name="OldPerformanceGuarantees" EntityType="NAV.OldPerformanceGuarantees" />
         <EntitySet Name="Pending_Po" EntityType="NAV.Pending_Po" />
         <EntitySet Name="PeriodicRiskStatusReports" EntityType="NAV.PeriodicRiskStatusReports" />
         <EntitySet Name="PettyCashLines" EntityType="NAV.PettyCashLines" />
@@ -15464,6 +15560,7 @@
         <EntitySet Name="companySizes" EntityType="NAV.companySizes" />
         <EntitySet Name="contacts" EntityType="NAV.contacts" />
         <EntitySet Name="ContractorSupervisonRequirements" EntityType="NAV.ContractorSupervisonRequirements" />
+        <EntitySet Name="ContractRequirements" EntityType="NAV.ContractRequirements" />
         <EntitySet Name="Copyright_Files" EntityType="NAV.Copyright_Files" />
         <EntitySet Name="CopyrightCategories" EntityType="NAV.CopyrightCategories" />
         <EntitySet Name="copyrightsetups" EntityType="NAV.copyrightsetups" />
@@ -15794,6 +15891,10 @@
         <AssociationSet Name="DailyPlanningWorkPlanLines_Foreman_ID_Link_WEPContractorTeamsList" Association="NAV.DailyPlanningWorkPlanLines_Foreman_ID_Link">
           <End Role="DailyPlanningWorkPlanLines" EntitySet="DailyPlanningWorkPlanLines" />
           <End Role="Foreman_ID_Link" EntitySet="WEPContractorTeamsList" />
+        </AssociationSet>
+        <AssociationSet Name="DailyWorkPlan_DailyWorkPlanWeekly_Work_Plan_Line_Subpage_DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Association="NAV.DailyWorkPlan_DailyWorkPlanWeekly_Work_Plan_Line_Subpage">
+          <End Role="DailyWorkPlan" EntitySet="DailyWorkPlan" />
+          <End Role="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" EntitySet="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" />
         </AssociationSet>
         <AssociationSet Name="DailyWorkRecordCard_DailyWorkRecordCardDaily_Work_Record_Execution_Li_DailyWorkRecordCardDaily_Work_Record_Execution_Li" Association="NAV.DailyWorkRecordCard_DailyWorkRecordCardDaily_Work_Record_Execution_Li">
           <End Role="DailyWorkRecordCard" EntitySet="DailyWorkRecordCard" />
@@ -16719,6 +16820,10 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="DailyWorkPlan" EntitySet="DailyWorkPlan" />
         </AssociationSet>
+        <AssociationSet Name="Company_DailyWorkPlanWeekly_Work_Plan_Line_Subpage_DailyWorkPlanWeekly_Work_Plan_Line_Subpage" Association="NAV.Company_DailyWorkPlanWeekly_Work_Plan_Line_Subpage">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" EntitySet="DailyWorkPlanWeekly_Work_Plan_Line_Subpage" />
+        </AssociationSet>
         <AssociationSet Name="Company_DailyWorkPlanLineSubpage_DailyWorkPlanLineSubpage" Association="NAV.Company_DailyWorkPlanLineSubpage">
           <End Role="Company" EntitySet="Company" />
           <End Role="DailyWorkPlanLineSubpage" EntitySet="DailyWorkPlanLineSubpage" />
@@ -16918,6 +17023,10 @@
         <AssociationSet Name="Company_NewRiskVouchers_NewRiskVouchers" Association="NAV.Company_NewRiskVouchers">
           <End Role="Company" EntitySet="Company" />
           <End Role="NewRiskVouchers" EntitySet="NewRiskVouchers" />
+        </AssociationSet>
+        <AssociationSet Name="Company_OldPerformanceGuarantees_OldPerformanceGuarantees" Association="NAV.Company_OldPerformanceGuarantees">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="OldPerformanceGuarantees" EntitySet="OldPerformanceGuarantees" />
         </AssociationSet>
         <AssociationSet Name="Company_Pending_Po_Pending_Po" Association="NAV.Company_Pending_Po">
           <End Role="Company" EntitySet="Company" />
@@ -17450,6 +17559,10 @@
         <AssociationSet Name="Company_ContractorSupervisonRequirements_ContractorSupervisonRequirements" Association="NAV.Company_ContractorSupervisonRequirements">
           <End Role="Company" EntitySet="Company" />
           <End Role="ContractorSupervisonRequirements" EntitySet="ContractorSupervisonRequirements" />
+        </AssociationSet>
+        <AssociationSet Name="Company_ContractRequirements_ContractRequirements" Association="NAV.Company_ContractRequirements">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="ContractRequirements" EntitySet="ContractRequirements" />
         </AssociationSet>
         <AssociationSet Name="Company_Copyright_Files_Copyright_Files" Association="NAV.Company_Copyright_Files">
           <End Role="Company" EntitySet="Company" />

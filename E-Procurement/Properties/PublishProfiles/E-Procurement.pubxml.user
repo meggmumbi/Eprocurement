@@ -112,7 +112,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/05/2021 11:06:46</publishTime>
     </File>
     <File Include="assets/customJs/CompleteSupplierRegistration.js">
-      <publishTime>06/08/2022 17:17:11</publishTime>
+      <publishTime>07/29/2022 17:46:57</publishTime>
     </File>
     <File Include="assets/customJs/Customjs.js">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -142,7 +142,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="assets/customJs/JsCustomSupplierRegistration.js">
-      <publishTime>04/11/2022 14:58:50</publishTime>
+      <publishTime>07/29/2022 17:51:03</publishTime>
     </File>
     <File Include="assets/customJs/JsCustomTenderResponse.js">
       <publishTime>01/14/2022 18:48:14</publishTime>
@@ -166,7 +166,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="assets/customJs/RfiResponse.js">
-      <publishTime>06/08/2022 15:59:07</publishTime>
+      <publishTime>07/13/2022 13:44:39</publishTime>
     </File>
     <File Include="assets/customJs/supplierRegistration.js">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -403,10 +403,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="bin/E-Procurement.dll">
-      <publishTime>06/08/2022 17:32:29</publishTime>
+      <publishTime>07/29/2022 18:21:16</publishTime>
     </File>
     <File Include="bin/E-Procurement.XmlSerializers.dll">
-      <publishTime>06/08/2022 17:32:33</publishTime>
+      <publishTime>07/29/2022 18:21:19</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -928,7 +928,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Contractor/Login.cshtml">
-      <publishTime>10/04/2021 13:33:52</publishTime>
+      <publishTime>07/06/2022 16:10:36</publishTime>
     </File>
     <File Include="Views/Contractor/MyAccount.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1170,6 +1170,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Error.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
+    <File Include="Views/Home/FormOfSecurity.cshtml">
+      <publishTime>07/07/2022 14:22:49</publishTime>
+    </File>
+    <File Include="Views/Home/Guarantee.cshtml">
+      <publishTime>07/13/2022 10:01:36</publishTime>
+    </File>
     <File Include="Views/Home/IncomeYearCodes.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
@@ -1215,11 +1221,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/NotFound.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
+    <File Include="Views/Home/OpenPerfomanceGuarantee.cshtml">
+      <publishTime>07/07/2022 13:27:12</publishTime>
+    </File>
     <File Include="Views/Home/OpenRFQs.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Home/PastExperienceCountries.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
+    </File>
+    <File Include="Views/Home/PerfGuaranteeDocAttach.cshtml">
+      <publishTime>07/29/2022 18:18:39</publishTime>
     </File>
     <File Include="Views/Home/PostalCodeList.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1244,6 +1256,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Home/ProjectRole.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
+    </File>
+    <File Include="Views/Home/Projects.cshtml">
+      <publishTime>07/07/2022 11:07:44</publishTime>
+    </File>
+    <File Include="Views/Home/purchasecontractId.cshtml">
+      <publishTime>07/07/2022 12:02:04</publishTime>
     </File>
     <File Include="Views/Home/RegionsList.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1459,7 +1477,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/04/2021 13:33:52</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/31/2022 11:20:52</publishTime>
+      <publishTime>07/07/2022 13:24:49</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/04/2021 13:33:52</publishTime>
@@ -1474,7 +1492,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2022 08:47:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/30/2022 17:10:19</publishTime>
+      <publishTime>07/29/2022 18:21:21</publishTime>
     </File>
   </ItemGroup>
 </Project>

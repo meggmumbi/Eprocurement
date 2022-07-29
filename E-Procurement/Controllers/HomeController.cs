@@ -39,7 +39,7 @@ namespace E_Procurement.Controllers
             {
                 var nav = NavConnection.ReturnNav();
                 var today = DateTime.Today;
-                var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status == "Published" && x.Procurement_Method == "Open Tender" /*&& x.Submission_End_Date >= today*/).ToList();
+                var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status == "Published" && x.Procurement_Method == "Open Tender").ToList();
                 foreach (var tenders in query)
                 {
                     TenderModel tender = new TenderModel();
@@ -70,7 +70,12 @@ namespace E_Procurement.Controllers
                 throw ex;
             }
             return View(list);
-        }        
+        }  
+        
+        public ActionResult Guarantee()
+        {
+            return View();
+        }
          public ActionResult InvitationforPrequalifications()
         {
 
@@ -401,6 +406,85 @@ namespace E_Procurement.Controllers
             }
             return View(equipmentcategories);
         }
+
+        public ActionResult purchasecontractId()
+        {
+            List<PurchaseContracts> purchasecontractz = new List<PurchaseContracts>();
+            try
+            {
+                var nav = NavConnection.ReturnNav();
+                var vendorNo = Convert.ToString(Session["vendorNo"]);
+                var purchContract = nav.PurchaseHeader.Where(r => r.Document_Type == "Blanket Order");
+                foreach (var purchContracts in purchContract)
+                {
+                    PurchaseContracts purchaseContractIds = new PurchaseContracts();
+                    purchaseContractIds.No = purchContracts.No;
+                    purchaseContractIds.Description = purchContracts.Pay_to_Name;
+                    purchasecontractz.Add(purchaseContractIds);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return View(purchasecontractz);
+        }
+
+
+        public ActionResult Projects()
+        {
+            List<jobs> jobz = new List<jobs>();
+            try
+            {
+                var nav = NavConnection.ReturnNav();
+                var vendorNo = Convert.ToString(Session["vendorNo"]);
+                var purchContract = nav.jobs.ToList();
+                foreach (var purchContracts in purchContract)
+                {
+                    jobs purchaseContractIds = new jobs();
+                    purchaseContractIds.projectNo = purchContracts.No;
+                    purchaseContractIds.Description = purchContracts.Description;
+                    jobz.Add(purchaseContractIds);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return View(jobz);
+        }
+        public ActionResult FormOfSecurity()
+        {
+            List<FormOfSec> Forms = new List<FormOfSec>();
+            try
+            {
+                var nav = NavConnection.ReturnNav();
+                var vendorNo = Convert.ToString(Session["vendorNo"]);
+                var purchContract = nav.TenderSecurityTypes.Where(r=>r.Security_Type== "Performance/Contract Security").ToList();
+                foreach (var purchContracts in purchContract)
+                {
+                    FormOfSec purchaseContractIds = new FormOfSec();
+                    purchaseContractIds.Code = purchContracts.Code;
+                    purchaseContractIds.Description = purchContracts.Description;
+                    Forms.Add(purchaseContractIds);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return View(Forms);
+        }
+
         public ActionResult ProjectRole()
         {
             List<ProjectRole> projectRole = new List<ProjectRole>();
@@ -737,7 +821,6 @@ namespace E_Procurement.Controllers
                 return View(model);
             }
         }
-
         public ActionResult TenderAttachDocument(string tenderNo, string Response)
         {
             if (Session["vendorNo"] == null)
@@ -756,6 +839,24 @@ namespace E_Procurement.Controllers
                 model.BidDetails = GetBidResponseDetails(tenderNo, vendorNo);
                 ViewBag.TenderNo = Response;
                 model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(Response, vendorNo);
+                return View(model);
+            }
+        }
+
+        public ActionResult PerfGuaranteeDocAttach(string Response)
+        {
+            if (Session["vendorNo"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var vendorNo = Session["vendorNo"].ToString();
+                dynamic model = new ExpandoObject();
+                Response = Convert.ToString(Session["Response"]);
+                model.RequiredDocuments = GetRequiredContractDocs(Response);
+                model.AttachedBiddDocuments = GetBidAttachedDocumentsDetails(Response, vendorNo);               
+                model.UploadedDocument = PopulatePerformanceDocumentsfromSpTable(Response);
                 return View(model);
             }
         }
@@ -1459,91 +1560,7 @@ namespace E_Procurement.Controllers
             }
             return Json(results, JsonRequestBehavior.AllowGet);
         }
-        //public JsonResult PrequalifiedAttachDocuments(List<prequalifiedDocuments> finance)
-        //{
-        //    var results = (dynamic)null;
-        //    try
-        //    {
-        //        if (finance == null)
-        //        {
-        //            finance = new List<prequalifiedDocuments>();
-        //        }
-        //        foreach (prequalifiedDocuments financedetail in finance)
-        //        {
-                   
 
-        //            var vendorNo = Convert.ToString(Session["vendorNo"]);
-        //            var nav = new NavConnection().ObjNav();
-        //            string storedFilename = "";
-
-        //            int errCounter = 0, succCounter = 0;
-        //            DateTime startdate, enddate;
-        //            CultureInfo usCulture = new CultureInfo("es-ES");
-        //            DateTime dtofIssue = DateTime.Now;
-        //            DateTime expiryDate = DateTime.Now;
-        //            if (financedetail.issueDate == null && financedetail.expirydate == null)
-        //            {
-        //                dtofIssue = DateTime.Parse(financedetail.issueDate, usCulture.DateTimeFormat);
-        //                expiryDate = DateTime.Parse(financedetail.expirydate, usCulture.DateTimeFormat);
-        //            }
-                    
-
-        //            if (financedetail.browsedDoc == null)
-        //            {
-        //                errCounter++;
-        //                return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
-        //            }
-
-        //            if (vendorNo.Contains(":"))
-        //                vendorNo = vendorNo.Replace(":", "[58]");
-        //            vendorNo = vendorNo.Replace("/", "[47]");
-
-        //            if (financedetail.procurementDocumentType.Contains("/"))
-        //                financedetail.procurementDocumentType = financedetail.procurementDocumentType.Replace("/", "_");
-
-        //            FileInfo fi = new FileInfo(financedetail.browsedDoc);
-                 
-        //            //string fileName0 = Path.GetFileName(financedetail.browsedDoc.FileName);
-        //            //string ext0 = _getFileextension(financedetail.browsedDoc);
-        //            string fileName0 = fi.Name;
-        //            string ext0 = fi.Extension;
-        //            string savedF0 = vendorNo + "_" + fileName0 + ext0;
-
-        //            bool up2Sharepoint = _UploadSupplierPrequalificationsDocumentToSharepoint(financedetail.applicationNO, financedetail.browsedDoc, financedetail.procurementDocumentType);
-        //            if (up2Sharepoint == true)
-        //            {
-        //                string filename = vendorNo + "_" + fileName0;
-        //                string sUrl = ConfigurationManager.AppSettings["S_URL"];
-        //                string defaultlibraryname = "Procurement%20Documents/";
-        //                string customlibraryname = "Invitation For Prequalification";
-        //                string sharepointLibrary = defaultlibraryname + customlibraryname;
-        //                financedetail.applicationNO = financedetail.applicationNO.Replace('/', '_');
-        //                financedetail.applicationNO = financedetail.applicationNO.Replace(':', '_');
-        //                //Sharepoint File Link
-        //                string sharepointlink = sUrl + sharepointLibrary + "/" + financedetail.applicationNO + "/" + filename;
-        //                string fsavestatus = nav.FnInsertPrequalificatinDocuments(vendorNo, financedetail.procurementDocumentType, "", financedetail.certificateNo, dtofIssue, expiryDate, filename, financedetail.applicationNO, sharepointlink);
-        //                var splitanswer = fsavestatus.Split('*');
-        //                results = splitanswer[0];
-        //                //switch (splitanswer[0])
-        //                //{
-        //                //    case "success":
-        //                //        return Json("success*" + succCounter, JsonRequestBehavior.AllowGet);
-        //                //    default:
-        //                //        return Json("danger*" + succCounter, JsonRequestBehavior.AllowGet);
-        //                //}
-        //            }
-        //            else
-        //            {
-        //                return Json("sharepointError*", JsonRequestBehavior.AllowGet);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        results = ex.Message;
-        //    }
-        //    return Json(results, JsonRequestBehavior.AllowGet);
-        //}
 
         public JsonResult FnUploadBidResponseDocumentsTender(List<prequalifiedDocuments> finance)
         {
@@ -1834,6 +1851,47 @@ namespace E_Procurement.Controllers
                     document.Requirement_Type = documents.Requirement_Type;
                     document.Special_Group_Requirement = Convert.ToString(documents.Special_Group_Requirement);
                     document.Specialized_Provider_Req = Convert.ToString(documents.Specialized_Provider_Req);
+                    list.Add(document);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return list;
+        }
+
+
+        private static List<IfsDocumentTModel> GetRequiredContractDocs(string tendernumber)
+        {
+            List<IfsDocumentTModel> list = new List<IfsDocumentTModel>();
+            try
+            {
+                var nav = NavConnection.ReturnNav();
+                var query = nav.ContractRequirements.Where(x => x.Document_ID == tendernumber).ToList();
+                foreach (var documents in query)
+                {
+                    IfsDocumentTModel document = new IfsDocumentTModel();
+                    document.Document_No = documents.Document_ID;
+                    document.Procurement_Document_Type_ID = Convert.ToString(documents.Procurement_Document_Type);
+                    document.Description = documents.Description;
+                    document.Track_Certificate_Expiry = Convert.ToString(documents.Track_Certificate_Expiry);
+                    document.prnNo = documents.PRN_No;
+                    document.ifsNo = documents.IFS_Code;
+                    document.processArea = documents.Process_Area;
+                    document.instructions = documents.Guidelines_Instruction;
+                    if (document.Track_Certificate_Expiry == "True")
+                    {
+
+                        document.Track_Certificate_Expiry = "Yes";
+                    }
+                    else
+                    {
+                        document.Track_Certificate_Expiry = "No";
+                    }
+                    document.Requirement_Type = documents.Requirement_Type;
+                  
                     list.Add(document);
                 }
             }
@@ -4656,6 +4714,80 @@ namespace E_Procurement.Controllers
                 switch (res[0])
                 {
                     case "success":
+                        return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+
+                    default:
+                        return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult PerformanceGuaranteeDetails(performanceGuarantee perfGuarantee)
+        {
+            try
+            {
+                var vendorNo = Session["vendorNo"].ToString();
+                DateTime startdate, enddate;
+                CultureInfo usCulture = new CultureInfo("es-ES");
+                startdate = DateTime.Parse(perfGuarantee.effectiveDate, usCulture.DateTimeFormat);
+                enddate = DateTime.Parse(perfGuarantee.expiryDate, usCulture.DateTimeFormat);
+
+                if (string.IsNullOrEmpty(perfGuarantee.docNo))
+                {
+                    perfGuarantee.docNo = "";
+                }
+
+                var nav = new NavConnection().ObjNav();
+                var status = nav.FnPerformanceGiarantee(perfGuarantee.docNo, perfGuarantee.purchaseContractId, perfGuarantee.projectId, vendorNo,
+                 perfGuarantee.gurantorName, perfGuarantee.policyNo, Convert.ToDecimal(perfGuarantee.amount), perfGuarantee.formOfSec,
+                Convert.ToInt32(perfGuarantee.InstType), perfGuarantee.regOffice, perfGuarantee.insurerEmail, startdate, enddate);
+                var res = status.Split('*');
+                switch (res[0])
+                {
+                    case "success":
+                        Session["Response"] = res[2];
+                        return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
+
+                    default:
+                        return Json("danger*" + res[1], JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult fnSubmitPerformanceGuarantee(performanceGuarantee perfGuarantee)
+        {
+            try
+            {
+                var vendorNo = Session["vendorNo"].ToString();
+               
+
+                if (string.IsNullOrEmpty(perfGuarantee.docNo))
+                {
+                    return Json("danger*" + "Application Number cannot be empty", JsonRequestBehavior.AllowGet);
+                }
+
+                var nav = new NavConnection().ObjNav();
+                var status = nav.FnSubmitPerformanceGiarantee(perfGuarantee.docNo);
+                var res = status.Split('*');
+                switch (res[0])
+                {
+                    case "success":                       
                         return Json("success*" + res[1], JsonRequestBehavior.AllowGet);
 
                     default:
@@ -7979,7 +8111,7 @@ namespace E_Procurement.Controllers
                 {
                     var nav = NavConnection.ReturnNav();
                     var today = DateTime.Today;
-                    var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status=="Published" &&x.Procurement_Method== "Open Tender" && x.Submission_End_Date>=today).ToList();
+                    var query = nav.invitetoTenders.Where(x => x.Published == true && x.Document_Status=="Published" &&x.Procurement_Method== "Open Tender").ToList();
                     foreach (var tenders in query)
                     {
                         TenderModel tender = new TenderModel();
@@ -8012,6 +8144,49 @@ namespace E_Procurement.Controllers
                 return View(list);
             }
         }
+
+
+        public ActionResult OpenPerfomanceGuarantee()
+        {
+            if (Session["vendorNo"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                List<performanceGuarantee> list = new List<performanceGuarantee>();
+                try
+                {
+                    var nav = NavConnection.ReturnNav();
+                    var today = DateTime.Today;
+                    var vendorNo = Session["vendorNo"].ToString();
+                    var query = nav.OldPerformanceGuarantees.Where(x => x.Contractor_ID == vendorNo && x.Document_Type== "Performance Guarantee").ToList();
+                    foreach (var tenders in query)
+                    {
+                        performanceGuarantee tender = new performanceGuarantee();
+                        tender.docNo = tenders.Document_No;
+                        tender.DocDate = Convert.ToString(tenders.Document_Date);
+                        tender.contractorName = tenders.Contractor_Name;
+                        tender.projectId = tenders.Project_ID;
+                        tender.projectName = tenders.Project_Name;
+                        tender.status = tenders.Status;
+                        tender.gurantorName = tenders.Insurer_Guarantor_Name;
+                        tender.policyNo = tenders.Policy_Guarantee_No;
+                        tender.expiryDate = Convert.ToString(tenders.Effective_Date);                        
+                        list.Add(tender);
+                    }
+
+
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+                return View(list);
+            }
+        }
+
         public ActionResult DebarmentList()
         {
             if (Session["vendorNo"] == null)
@@ -8785,6 +8960,128 @@ namespace E_Procurement.Controllers
                 return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+
+
+
+        public JsonResult FnUploadPerfomanceGuaranteeDocuments( HttpPostedFileBase browsedfile,string ResponseNumber)
+        {
+            try
+            {
+                var vendorNo = Convert.ToString(Session["vendorNo"]);
+                var nav = new NavConnection().ObjNav();
+                string storedFilename = "";
+                CultureInfo usCulture = new CultureInfo("en-ES");
+                int errCounter = 0, succCounter = 0;
+               
+         
+
+
+                if (browsedfile == null)
+                {
+                    errCounter++;
+                    return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
+                }
+
+                if (vendorNo.Contains(":"))
+                    vendorNo = vendorNo.Replace(":", "[58]");
+                vendorNo = vendorNo.Replace("/", "[47]");
+
+            
+
+
+                string fileName0 = Path.GetFileName(browsedfile.FileName);
+                string ext0 = _getFileextension(browsedfile);
+                string savedF0 = vendorNo + "_"  + ext0;
+
+                bool up2Sharepoint = _UploadPerformanceGuaranteeDocumentToSharepoint(ResponseNumber, browsedfile);
+                if (up2Sharepoint == true)
+                {
+                    string filename = vendorNo + "_" + fileName0;
+                    string sUrl = ConfigurationManager.AppSettings["S_URL"];
+                    string defaultlibraryname = "Procurement%20Documents/";
+                    string customlibraryname = "Performance Guarantee";
+                    string sharepointLibrary = defaultlibraryname + customlibraryname;
+                    ResponseNumber = ResponseNumber.Replace('/', '_');
+                    ResponseNumber = ResponseNumber.Replace(':', '_');
+                    //Sharepoint File Link
+                   // string sharepointlink = sUrl + sharepointLibrary + "/" + ResponseNumber + "/" + filename;
+                    string sharepointlink = sUrl + sharepointLibrary + "/" + ResponseNumber + "/" + filename;
+
+                    string fsavestatus = nav.FnInsertPerfGuarantDocuments(vendorNo, filename, ResponseNumber, sharepointlink);
+                    var splitanswer = fsavestatus.Split('*');
+                    switch (splitanswer[0])
+                    {
+                        case "success":
+                            return Json("success*" + succCounter, JsonRequestBehavior.AllowGet);
+                        default:
+                            return Json("danger*" + succCounter, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("sharepointError*", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult FnUploadPerfomanceGuaranteeDocumentsLocal(HttpPostedFileBase browsedfile, string typauploadselect, string prn,string indexNo, string ResponseNumber)
+        {
+            try
+            {
+                var vendorNo = Convert.ToString(Session["vendorNo"]);
+                var nav = new NavConnection().ObjNav();
+                string storedFilename = "";
+                DateTime startdate, enddate;
+                CultureInfo usCulture = new CultureInfo("es-ES");
+                int errCounter = 0, succCounter = 0;
+
+               
+
+
+                if (browsedfile == null)
+                {
+                    errCounter++;
+                    return Json("danger*browsedfilenull", JsonRequestBehavior.AllowGet);
+                }
+
+                if (vendorNo.Contains(":"))
+                    vendorNo = vendorNo.Replace(":", "[58]");
+                vendorNo = vendorNo.Replace("/", "[47]");
+
+
+                if (typauploadselect.Contains("/"))
+                    typauploadselect = typauploadselect.Replace("/", "_");
+
+                string fileName0 = Path.GetFileName(browsedfile.FileName);
+                string ext0 = _getFileextension(browsedfile);
+                string savedF0 = prn + "_" + indexNo + "_" + fileName0;
+                // create the uploads folder if it doesn't exist               
+                var rootFolder = ConfigurationManager.AppSettings["FilesLocation"];
+                var subfolder = Path.Combine(rootFolder, "Contract/" + prn);
+                if (!Directory.Exists(subfolder))
+                    Directory.CreateDirectory(subfolder);
+                browsedfile.SaveAs(subfolder + "/" + savedF0);
+                var FilePath = subfolder + "/" + savedF0;
+                var nav1 = new NavConnection().ObjNav();
+                //nav.FnInsertPerfGuarantDocuments(vendorNo, filename, ResponseNumber, sharepointlink);
+                var status = nav.FnInsertFiledetailsPerformanceGuarantee(vendorNo, typauploadselect, ResponseNumber, FilePath);
+                return Json("success*" + "File uploaded successfully", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
         public string _getFileextension(HttpPostedFileBase filename)
         {
             return (Path.GetExtension(filename.FileName));
@@ -8884,6 +9181,53 @@ namespace E_Procurement.Controllers
                         string uploadfilename = vendorNumber + "_" + browsedFile.FileName;
                         Stream uploadfileContent = browsedFile.InputStream;
                         var sDocName = UploadSupplierTenderFile(uploadfileContent, uploadfilename, sSpSiteRelativeUrl, sharepointLibrary, vendorNumber);
+
+                        //SharePoint Link to be added to Navison Card
+                        string sharepointlink = sUrl + sharepointLibrary + "/" + vendorNumber + "/" + uploadfilename;
+
+                        if (!string.IsNullOrWhiteSpace(sDocName))
+                        {
+                            //var nav = NavConnection.ReturnNav();
+                            //string vendorNumberIdentity = vendorNumber;
+                            //string status = nav.FnrfiResponsetLinks(vendorNumberIdentity, uploadfilename, sharepointlink); 
+                            fileuploadSuccess = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // throw;
+                }
+            }
+            return fileuploadSuccess;
+        }
+
+        protected bool _UploadPerformanceGuaranteeDocumentToSharepoint(string vendorNumber, HttpPostedFileBase browsedFile)
+        {
+            bool fileuploadSuccess = false;
+            string sUrl = ConfigurationManager.AppSettings["S_URL"];
+            string tfilename = browsedFile.FileName;
+            string defaultlibraryname = "Procurement%20Documents/";
+            string customlibraryname = "Performance Guarantee";
+            string sharepointLibrary = defaultlibraryname + customlibraryname;
+            vendorNumber = vendorNumber.Replace('/', '_');
+            vendorNumber = vendorNumber.Replace(':', '_');
+
+            if (!string.IsNullOrWhiteSpace(sUrl) && !string.IsNullOrWhiteSpace(sharepointLibrary) && !string.IsNullOrWhiteSpace(tfilename))
+            {
+                string username = ConfigurationManager.AppSettings["S_USERNAME"];
+                string password = ConfigurationManager.AppSettings["S_PWD"];
+                string domainname = ConfigurationManager.AppSettings["S_DOMAIN"];
+                bool bbConnected = Connect(sUrl, username, password, domainname);
+                try
+                {
+                    if (bbConnected)
+                    {
+                        Uri uri = new Uri(sUrl);
+                        string sSpSiteRelativeUrl = uri.AbsolutePath;
+                        string uploadfilename = vendorNumber + "_" + browsedFile.FileName;
+                        Stream uploadfileContent = browsedFile.InputStream;
+                        var sDocName = UploadSupplierPerfGuaranteeFile(uploadfileContent, uploadfilename, sSpSiteRelativeUrl, sharepointLibrary, vendorNumber);
 
                         //SharePoint Link to be added to Navison Card
                         string sharepointlink = sUrl + sharepointLibrary + "/" + vendorNumber + "/" + uploadfilename;
@@ -9183,6 +9527,42 @@ namespace E_Procurement.Controllers
             vendorNumber = vendorNumber.Replace('/', '_');
             vendorNumber = vendorNumber.Replace(':', '_');
             string parent_folderName = "Tender Bid Reponses";
+            string subFolderName = vendorNumber;
+            //+ "/"+ VendorNumber;
+            string filelocation = sLibraryName + "/" + subFolderName;
+            try
+            {
+                // if a folder doesn't exists, create it
+                var listTitle = "Procurement Documents";
+                if (!FolderExists(SPClientContext.Web, listTitle, parent_folderName + "/" + subFolderName))
+                    CreateFolder(SPClientContext.Web, listTitle, parent_folderName + "/" + subFolderName);
+
+                if (SPWeb != null)
+                {
+
+                    var sFileUrl = String.Format("{0}/{1}/{2}", sSpSiteRelativeUrl, filelocation, sFileName);
+                    Microsoft.SharePoint.Client.File.SaveBinaryDirect(SPClientContext, sFileUrl, fs, true);
+                    SPClientContext.ExecuteQuery();
+                    sDocName = sFileName;
+
+                }
+
+
+            }
+
+            catch (Exception ex)
+            {
+                sDocName = string.Empty;
+            }
+            return sDocName;
+        }
+
+        public string UploadSupplierPerfGuaranteeFile(Stream fs, string sFileName, string sSpSiteRelativeUrl, string sLibraryName, string vendorNumber)
+        {
+            string sDocName = string.Empty;
+            vendorNumber = vendorNumber.Replace('/', '_');
+            vendorNumber = vendorNumber.Replace(':', '_');
+            string parent_folderName = "Performance Guarantee";
             string subFolderName = vendorNumber;
             //+ "/"+ VendorNumber;
             string filelocation = sLibraryName + "/" + subFolderName;
@@ -9702,6 +10082,44 @@ namespace E_Procurement.Controllers
                 }
             }
         }
+
+        public JsonResult DeleteperformancedDocfromSharepoint(string filename,string docNo)
+        {
+            var vendorNo = Convert.ToString(Session["vendorNo"]);
+            var sharepointUrl = ConfigurationManager.AppSettings["S_URL"];
+            using (ClientContext ctx = new ClientContext(sharepointUrl))
+            {
+                string password = ConfigurationManager.AppSettings["S_PWD"];
+                string account = ConfigurationManager.AppSettings["S_USERNAME"];
+                string domainname = ConfigurationManager.AppSettings["S_DOMAIN"];
+                var secret = new SecureString();
+                foreach (char c in password)
+                {
+                    secret.AppendChar(c);
+                }
+                try
+                {
+                    ctx.Credentials = new NetworkCredential(account, secret, domainname);
+                    ctx.Load(ctx.Web);
+                    ctx.ExecuteQuery();
+
+                    Uri uri = new Uri(sharepointUrl);
+                    string sSpSiteRelativeUrl = uri.AbsolutePath;
+                    string filePath = sSpSiteRelativeUrl + "Procurement Documents/Performance Guarantee/" + docNo + "/" + filename;
+                    var file = ctx.Web.GetFileByServerRelativeUrl(filePath);
+                    ctx.Load(file, f => f.Exists);
+                    file.DeleteObject();
+                    ctx.ExecuteQuery();
+                  
+                    return Json("success*", JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    return Json("danger*" + ex.Message, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
         private static List<SharePointTModel> PopulateTenderDocumentsfromSpTable(string ittpnumber)
         {
             List<SharePointTModel> alldocuments = new List<SharePointTModel>();
@@ -9801,6 +10219,116 @@ namespace E_Procurement.Controllers
                 }
                 return alldocuments;
             }
+        }
+        private static List<IfsDocumentTModel> PopulatePerformanceDocumentsfromSpTable(string ittpnumber)       
+        {
+            List<IfsDocumentTModel> list = new List<IfsDocumentTModel>();
+            try
+            {
+                var nav = NavConnection.ReturnNav();
+                var query = nav.ContractRequirements.Where(x => x.Document_ID == ittpnumber && x.Document_Link !="").ToList();
+                foreach (var documents in query)
+                {
+                    IfsDocumentTModel document = new IfsDocumentTModel();
+                    document.Document_No = documents.Document_ID;
+                    document.Procurement_Document_Type_ID = Convert.ToString(documents.Procurement_Document_Type);
+                    document.Description = documents.Description;
+                    document.Track_Certificate_Expiry = Convert.ToString(documents.Track_Certificate_Expiry);
+                    document.prnNo = documents.PRN_No;
+                    document.ifsNo = documents.IFS_Code;
+                    document.processArea = documents.Process_Area;
+                    document.instructions = documents.Guidelines_Instruction;
+                    if (document.Track_Certificate_Expiry == "True")
+                    {
+
+                        document.Track_Certificate_Expiry = "Yes";
+                    }
+                    else
+                    {
+                        document.Track_Certificate_Expiry = "No";
+                    }
+                    document.Requirement_Type = documents.Requirement_Type;
+                    document.filelink = documents.Document_Link;
+
+                    list.Add(document);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            return list;
+
+            //List<SharePointTModel> alldocuments = new List<SharePointTModel>();
+            //using (ClientContext ctx = new ClientContext(ConfigurationManager.AppSettings["S_URL"]))
+            //{
+            //    string password = ConfigurationManager.AppSettings["S_PWD"];
+            //    string account = ConfigurationManager.AppSettings["S_USERNAME"];
+            //    string domainname = ConfigurationManager.AppSettings["S_DOMAIN"];
+            //    var secret = new SecureString();
+
+            //    var arraydocs = new List<string>();
+
+            //    foreach (char c in password)
+            //    {
+            //        secret.AppendChar(c);
+            //    }
+            //    ctx.Credentials = new NetworkCredential(account, secret, domainname);
+            //    ctx.Load(ctx.Web);
+            //    ctx.ExecuteQuery();
+            //    List list = ctx.Web.Lists.GetByTitle("Procurement Documents");
+            //    //Get Unique IttNumber
+            //    if (!string.IsNullOrEmpty(ittpnumber))
+            //    {
+            //        string uniqueittpnumber = ittpnumber;
+            //        uniqueittpnumber = uniqueittpnumber.Replace('/', '_');
+            //        uniqueittpnumber = uniqueittpnumber.Replace(':', '_');
+
+            //        ctx.Load(list);
+            //        ctx.Load(list.RootFolder);
+            //        ctx.Load(list.RootFolder.Folders);
+            //        ctx.Load(list.RootFolder.Files);
+            //        ctx.ExecuteQuery();
+
+
+            //        FolderCollection allFolders = list.RootFolder.Folders;
+            //        List<string> allFiles = new List<string>();
+            //        foreach (Folder folder in allFolders)
+            //        {
+            //            if (folder.Name == "Performance Guarantee")
+            //            {
+
+            //                ctx.Load(folder.Folders);
+            //                ctx.ExecuteQuery();
+            //                FolderCollection innerFolders = folder.Folders;
+            //                foreach (Folder folder1 in innerFolders)
+            //                {
+
+            //                    if (folder1.Name == uniqueittpnumber)
+            //                    {
+            //                        ctx.Load(folder1.Files);
+            //                        ctx.ExecuteQuery();
+            //                        FileCollection ittnumberFiles = folder1.Files;
+            //                        foreach (Microsoft.SharePoint.Client.File file in ittnumberFiles)
+            //                        {
+            //                            ctx.ExecuteQuery();
+            //                            alldocuments.Add(new SharePointTModel { FileName = file.Name });
+
+            //                        }
+            //                    }
+            //                }
+
+
+
+
+            //            }
+
+            //        }
+            //    }
+            //}
+            //    return alldocuments;
+
         }
         private static List<SharePointTModel> AttachedPrequalificationDocuments(string prequalificationNo)
         {

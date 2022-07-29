@@ -110,6 +110,80 @@
           </sequence>
         </complexType>
       </element>
+      <element name="FnPerformanceGiarantee">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentoNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="purchaseContactId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="projectId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="contaractorId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="insurerName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="policyNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="amountInsured" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="formOfSecurity" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="issuerInstitutionType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="issuerRegOffice" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="effectiveDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="expiryDate" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnPerformanceGiarantee_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertPerfGuarantDocuments">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filename" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sharepointlink" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertPerfGuarantDocuments_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitPerformanceGiarantee">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentoNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnSubmitPerformanceGiarantee_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertFiledetailsPerformanceGuarantee">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="vendorNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="type" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="responseNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filepath" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FnInsertFiledetailsPerformanceGuarantee_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="FncancelWEPRecordApproval">
         <complexType>
           <sequence>
@@ -4499,6 +4573,30 @@
   <message name="FnDelDocument_Result">
     <part name="parameters" element="tns:FnDelDocument_Result" />
   </message>
+  <message name="FnPerformanceGiarantee">
+    <part name="parameters" element="tns:FnPerformanceGiarantee" />
+  </message>
+  <message name="FnPerformanceGiarantee_Result">
+    <part name="parameters" element="tns:FnPerformanceGiarantee_Result" />
+  </message>
+  <message name="FnInsertPerfGuarantDocuments">
+    <part name="parameters" element="tns:FnInsertPerfGuarantDocuments" />
+  </message>
+  <message name="FnInsertPerfGuarantDocuments_Result">
+    <part name="parameters" element="tns:FnInsertPerfGuarantDocuments_Result" />
+  </message>
+  <message name="FnSubmitPerformanceGiarantee">
+    <part name="parameters" element="tns:FnSubmitPerformanceGiarantee" />
+  </message>
+  <message name="FnSubmitPerformanceGiarantee_Result">
+    <part name="parameters" element="tns:FnSubmitPerformanceGiarantee_Result" />
+  </message>
+  <message name="FnInsertFiledetailsPerformanceGuarantee">
+    <part name="parameters" element="tns:FnInsertFiledetailsPerformanceGuarantee" />
+  </message>
+  <message name="FnInsertFiledetailsPerformanceGuarantee_Result">
+    <part name="parameters" element="tns:FnInsertFiledetailsPerformanceGuarantee_Result" />
+  </message>
   <message name="FncancelWEPRecordApproval">
     <part name="parameters" element="tns:FncancelWEPRecordApproval" />
   </message>
@@ -6000,6 +6098,22 @@
       <input name="FnDelDocument" message="tns:FnDelDocument" />
       <output name="FnDelDocument_Result" message="tns:FnDelDocument_Result" />
     </operation>
+    <operation name="FnPerformanceGiarantee">
+      <input name="FnPerformanceGiarantee" message="tns:FnPerformanceGiarantee" />
+      <output name="FnPerformanceGiarantee_Result" message="tns:FnPerformanceGiarantee_Result" />
+    </operation>
+    <operation name="FnInsertPerfGuarantDocuments">
+      <input name="FnInsertPerfGuarantDocuments" message="tns:FnInsertPerfGuarantDocuments" />
+      <output name="FnInsertPerfGuarantDocuments_Result" message="tns:FnInsertPerfGuarantDocuments_Result" />
+    </operation>
+    <operation name="FnSubmitPerformanceGiarantee">
+      <input name="FnSubmitPerformanceGiarantee" message="tns:FnSubmitPerformanceGiarantee" />
+      <output name="FnSubmitPerformanceGiarantee_Result" message="tns:FnSubmitPerformanceGiarantee_Result" />
+    </operation>
+    <operation name="FnInsertFiledetailsPerformanceGuarantee">
+      <input name="FnInsertFiledetailsPerformanceGuarantee" message="tns:FnInsertFiledetailsPerformanceGuarantee" />
+      <output name="FnInsertFiledetailsPerformanceGuarantee_Result" message="tns:FnInsertFiledetailsPerformanceGuarantee_Result" />
+    </operation>
     <operation name="FncancelWEPRecordApproval">
       <input name="FncancelWEPRecordApproval" message="tns:FncancelWEPRecordApproval" />
       <output name="FncancelWEPRecordApproval_Result" message="tns:FncancelWEPRecordApproval_Result" />
@@ -7038,6 +7152,42 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="FnDelDocument_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnPerformanceGiarantee">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnPerformanceGiarantee" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnPerformanceGiarantee">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnPerformanceGiarantee_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnInsertPerfGuarantDocuments">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertPerfGuarantDocuments" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnInsertPerfGuarantDocuments">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnInsertPerfGuarantDocuments_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnSubmitPerformanceGiarantee">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnSubmitPerformanceGiarantee" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnSubmitPerformanceGiarantee">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnSubmitPerformanceGiarantee_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FnInsertFiledetailsPerformanceGuarantee">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/eprocurement:FnInsertFiledetailsPerformanceGuarantee" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FnInsertFiledetailsPerformanceGuarantee">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FnInsertFiledetailsPerformanceGuarantee_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

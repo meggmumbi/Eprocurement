@@ -415,6 +415,176 @@
         });
 
     });
+
+
+    $(".button_submit_performance_response").click(function () {
+        var PastExperiencenObj = {
+            "docNo": $("#responseNumber").val(),
+           
+        }
+
+        //Swal Message
+        Swal.fire({
+            title: "Confirm Performance Guarantee Details Submission?",
+            text: "Are you sure you would like to proceed with submission?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            confirmButtonText: "Yes, Proceed!",
+            confirmButtonClass: "btn-success",
+            confirmButtonColor: "#008000",
+            position: "center"
+
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "/Home/fnSubmitPerformanceGuarantee",
+                    type: "POST",
+                    data: JSON.stringify(PastExperiencenObj),
+                    contentType: "application/json",
+                    cache: false,
+                    processData: false
+                }).done(function (status) {
+                    var registerstatus = status.split('*');
+                    status = registerstatus[0];
+                    switch (status) {
+                        case "success":
+                            Swal.fire
+                            ({
+                                title: "Performance Guarantee Submitted!",
+                                text: status,
+                                type: "success"
+                            }).then(() => {
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "green");
+                                $('#pastexperiencefeedback').attr("class", "alert alert-success");
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee have been successfully submitted!");
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "green");
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee have been successfully submitted.!");
+                                window.location.href = "/Home/OpenPerfomanceGuarantee"
+                            });
+                            VendorBidPastExperienceDetails.init();
+
+
+                            break;
+                        default:
+                            Swal.fire
+                            ({
+                                title: "Performance Guarantee Submission Error!!!",
+                                text: status,
+                                type: "error"
+                            }).then(() => {
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "red");
+                                $('#pastexperiencefeedback').addClass('alert alert-danger');
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee  could not be submitted" + status + ".!");
+                            });
+                            break;
+                    }
+                }
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Performance Guarantee  Cancelled',
+                    'You cancelled your Performance Guarantee submission!',
+                    'error'
+                );
+            }
+        });
+
+    });
+
+    $(".btn_savePerformanceGuarantee").click(function () {
+        var PastExperiencenObj = {           
+            "purchaseContractId": $("#purchasecontractid").val(),
+            "projectId": $("#projectid").val(),
+            "gurantorName": $("#guarantorName").val(),
+            "policyNo": $("#policyNo").val(),
+            "amount": $("#amountIns").val(),
+            "formOfSec": $("#formOfSec").val(),
+            "InstType": $("#institutionType").val(),
+            "regOffice": $("#issuerRegOffice").val(),
+            "insurerEmail": $("#insurerEmail").val(),
+            "effectiveDate": $("#effectiveDate").val(),
+            "expiryDate": $("#expiryDate").val(),
+         
+        }
+
+        //Swal Message
+        Swal.fire({
+            title: "Confirm Performance Guarantee Details Submission?",
+            text: "Are you sure you would like to proceed with submission?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            confirmButtonText: "Yes, Proceed!",
+            confirmButtonClass: "btn-success",
+            confirmButtonColor: "#008000",
+            position: "center"
+
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "/Home/PerformanceGuaranteeDetails",
+                    type: "POST",
+                    data: JSON.stringify(PastExperiencenObj),
+                    contentType: "application/json",
+                    cache: false,
+                    processData: false
+                }).done(function (status) {
+                    var registerstatus = status.split('*');
+                    status = registerstatus[0];
+                    switch (status) {
+                        case "success":
+                            Swal.fire
+                            ({
+                                title: "Performance Guarantee Details Submitted!",
+                                text: status,
+                                type: "success"
+                            }).then(() => {
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "green");
+                                $('#pastexperiencefeedback').attr("class", "alert alert-success");
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee Details have been successfully submitted.Kindly Proceed to fill in the rest details!");
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "green");
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee Details have been successfully submitted.Kindly Proceed to fill in the rest details!");
+                                window.location.href = "/Home/PerfGuaranteeDocAttach"
+                            });
+                            VendorBidPastExperienceDetails.init();
+                          
+                            
+                            break;
+                        default:
+                            Swal.fire
+                            ({
+                                title: "Performance Guarantee Details Submission Error!!!",
+                                text: status,
+                                type: "error"
+                            }).then(() => {
+                                $("#pastexperiencefeedback").css("display", "block");
+                                $("#pastexperiencefeedback").css("color", "red");
+                                $('#pastexperiencefeedback').addClass('alert alert-danger');
+                                $("#pastexperiencefeedback").html("Your Performance Guarantee Details could not be submitted" + status + ".Kindly Proceed to fill in the rest details!");
+                            });
+                            break;
+                    }
+                }
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Performance Guarantee Details Cancelled',
+                    'You cancelled your Performance Guarantee submission details!',
+                    'error'
+                );
+            }
+        });
+
+    });
+
+
+
     var BidResponseNumber = $("#bidnumber").val();
     var vendorNo = $("#vendorno").val();
     //Get All Past Experience  Details
@@ -1164,6 +1334,8 @@
         });
 
     });
+
+  
     //Supplier BidEquipments Reponse Function
     $(".btn_editEquipments").click(function () {
         //Set data to be sent

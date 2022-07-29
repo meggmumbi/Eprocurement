@@ -9,7 +9,13 @@
         public string Requirement_Type { get; set; }
         public string Special_Group_Requirement { get; set; }
         public string Specialized_Provider_Req { get; set; }
-
         public string instructions { get; set; }
+
+        //contractor
+        public string prnNo { get; set; }
+        public string procDocType { get; set; }
+        public string ifsNo { get; set; }
+        public string processArea { get; set; }
+        public string filelink { get; set; }
     }
 }

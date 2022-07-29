@@ -310,6 +310,7 @@
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\EquipmentCategories.cs" />
     <Compile Include="Models\Financials.cs" />
+    <Compile Include="Models\FormOfSec.cs" />
     <Compile Include="Models\FRISpecificRequirementModel.cs" />
     <Compile Include="Models\GeneralModel.cs" />
     <Compile Include="Models\GetVendorTModel.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="Models\IfsRequiredEquipmentsModel.cs" />
     <Compile Include="Models\IncomeStatementTModel.cs" />
     <Compile Include="Models\IndustryGroupModel.cs" />
+    <Compile Include="Models\jobs.cs" />
     <Compile Include="Models\LanguageModel.cs" />
     <Compile Include="Models\LitigationModel.cs" />
     <Compile Include="Models\Login.cs" />
@@ -328,6 +330,7 @@
     <Compile Include="Models\NavConnection.cs" />
     <Compile Include="Models\PastExperienceModel.cs" />
     <Compile Include="Models\PastXprModel.cs" />
+    <Compile Include="Models\performanceGuarantee.cs" />
     <Compile Include="Models\PrequalificationGeneralDetailsModel.cs" />
     <Compile Include="Models\PreQualificationModel.cs" />
     <Compile Include="Models\PreQualificationRequiredDocuments.cs" />
@@ -821,6 +824,12 @@
     <Content Include="Views\Home\TenderRFQAttachDocument.cshtml" />
     <None Include="Service References\OData\service.edmx" />
     <Content Include="Views\Home\supplierDocuments.cshtml" />
+    <Content Include="Views\Home\Guarantee.cshtml" />
+    <Content Include="Views\Home\purchasecontractId.cshtml" />
+    <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Home\FormOfSecurity.cshtml" />
+    <Content Include="Views\Home\OpenPerfomanceGuarantee.cshtml" />
+    <Content Include="Views\Home\PerfGuaranteeDocAttach.cshtml" />
     <None Include="Web References\Eprocurement\eprocurement.wsdl" />
     <None Include="Web References\Eprocurement\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

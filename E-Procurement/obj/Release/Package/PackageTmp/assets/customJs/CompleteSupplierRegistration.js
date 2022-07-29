@@ -2660,6 +2660,142 @@ $(document).ready(function () {
         });
     });
 
+
+    $('.btnUploadPerformanceGuarantDocuments').click(function (e) {
+        e.preventDefault();
+
+
+         var selectedFtype = $("#ProcDocType").val();
+         var selvaluedescription = $("#description").val();
+            var tprn = $("#prnno").val();
+            var tindexNo = $("#indexNo").val();
+            
+        var browsedDoc = document.getElementById('inputFileselector').files[0];     
+        var response = $("#DocNo").val();
+
+        var formDt = new FormData();
+        formDt.append("ResponseNumber", response); 
+        formDt.append("browsedfile", browsedDoc);
+
+        formDt.append("typauploadselect", selectedFtype);       
+        formDt.append("filedescription", selvaluedescription);
+        
+        formDt.append("prn", tprn);
+        formDt.append("indexNo", tindexNo);
+
+      
+        Swal.fire({
+            title: "Performance Guarantee Documents Upload",
+            text: "Proceed to upload all the selected document?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            confirmButtonText: "Yes, Upload!",
+            confirmButtonClass: "btn-success",
+            confirmButtonColor: "#008000",
+            position: "center"
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = ((evt.loaded / evt.total) * 100);
+                                $(".progress-bar").width(percentComplete + '%');
+                                $(".progress-bar").html(percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: '/Home/FnUploadPerfomanceGuaranteeDocumentsLocal',
+                    data: formDt,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    error: function () {
+                        $("#attachprequalificationdocumentsfeedback").css("color", "red");
+                        $('#attachprequalificationdocumentsfeedback').addClass('alert alert-danger');
+                        $("#attachprequalificationdocumentsfeedback").html("File upload failed, choose another file and try again!");
+                    },
+                    success: function (status) {
+                        var uploadsfs = status.split('*');
+                        status = uploadsfs[0];
+                        switch (status) {
+                            case "success":
+                                Swal.fire
+                                ({
+                                    title: "Performance Guarantee Files Uploaded!",
+                                    text: "Performance Guarantee File Uploaded Successfully!",
+                                    type: "success"
+                                }).then(() => {
+                                    $("#attachprequalificationdocumentsfeedback").css("display", "block");
+                                    $("#attachprequalificationdocumentsfeedback").css("color", "green");
+                                    $('#attachprequalificationdocumentsfeedback').attr("class", "alert alert-success");
+                                    $("#attachprequalificationdocumentsfeedback").html("Selected Performance Guarantee File Uploaded Successfully!");
+                                    $("#attachprequalificationdocumentsfeedback").css("display", "block");
+                                    $("#attachprequalificationdocumentsfeedback").css("color", "green");
+                                });
+                                window.location.href = "/Home/PerfGuaranteeDocAttach";
+                                // RegistrationDocuments.init();
+                                break;
+                            case "browsedfilenull":
+                                Swal.fire
+                                ({
+                                    title: "File Selection Null.Select File to Upload!",
+                                    text: "File input cannot be empty! Kindly Select File to Upload",
+                                    type: "error"
+                                }).then(() => {
+                                    $("#attachprequalificationdocumentsfeedback").css("display", "block");
+                                    $("#attachprequalificationdocumentsfeedback").css("color", "red");
+                                    $('#attachprequalificationdocumentsfeedback').attr('class', 'alert alert-danger');
+                                    $("#attachprequalificationdocumentsfeedback").html("File input cannot be empty! Kindly Select File to Upload");
+                                    $("#attachprequalificationdocumentsfeedback").focus();
+                                    $("#attachprequalificationdocumentsfeedback").css("border", "solid 1px red");
+                                });
+                                break;
+                            case "sharepointError":
+                                Swal.fire
+                                ({
+                                    title: "Sharepoint Connection Error!",
+                                    text: "There was an Error Connecting to the Sharepoint DMS Server! Kindly Contact KeRRA for More Details!",
+                                    type: "error"
+                                }).then(() => {
+                                    $("#attachprequalificationdocumentsfeedback").css("display", "block");
+                                    $("#attachprequalificationdocumentsfeedback").css("color", "red");
+                                    $('#attachprequalificationdocumentsfeedback').attr('class', 'alert alert-danger');
+                                    $("#attachprequalificationdocumentsfeedback").html("There was an Error Connecting to the Sharepoint DMS Server! Kindly Contact KeRRA for More Details!");
+                                    $("#attachprequalificationdocumentsfeedback").focus();
+                                    $("#attachprequalificationdocumentsfeedback").css("border", "solid 1px red");
+                                });
+                                break;
+                            default:
+                                Swal.fire
+                                ({
+                                    title: "Document Upload Error!!!",
+                                    text: uploadsfs[1],
+                                    type: "error"
+                                }).then(() => {
+                                    $("#attachprequalificationdocumentsfeedback").css("display", "block");
+                                    $("#attachprequalificationdocumentsfeedback").css("color", "red");
+                                    $('#attachprequalificationdocumentsfeedback').addClass('alert alert-danger');
+                                });
+
+                                break;
+                        }
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Performance Guarantee Document Upload Cancelled',
+                    'You cancelled your documents submission!',
+                    'error'
+                );
+            }
+        });
+    });
+
     $('.btnUploadTenderDocuments').click(function (e) {
         e.preventDefault();
         //  var VendorprequalificationNumber = $("#preapplicationo").val();    
